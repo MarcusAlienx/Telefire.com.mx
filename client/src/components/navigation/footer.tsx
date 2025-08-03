@@ -12,6 +12,7 @@ const company = [
   { name: "Ventajas", href: "#ventajas" },
   { name: "Sostenibilidad", href: "#sostenibilidad" },
   { name: "Aplicaciones", href: "#aplicaciones" },
+  { name: "Casos de Estudio", href: "#casos-estudio" },
   { name: "Acerca de", href: "#contacto" }
 ];
 

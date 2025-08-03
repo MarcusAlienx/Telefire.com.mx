@@ -40,6 +40,8 @@ export class MemStorage implements IStorage {
     const partnership: Partnership = { 
       ...insertPartnership, 
       id,
+      phone: insertPartnership.phone || null,
+      message: insertPartnership.message || null,
       createdAt: new Date()
     };
     this.partnerships.set(id, partnership);

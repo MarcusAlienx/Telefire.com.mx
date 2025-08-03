@@ -2,9 +2,9 @@
 
 ## Overview
 
-This is a corporate website for Telefire, a company specializing in intelligent building management systems (IBMS), fire safety, and security solutions. The project is built as a full-stack web application with a React frontend and Express backend, featuring a modern responsive design using shadcn/ui components and Tailwind CSS.
+This is a complete Spanish clone of Telefire.com for the Mexican market, featuring all original design elements, effects, typography, and functionality. The project is built as a full-stack web application with a React frontend and Express backend, using shadcn/ui components and Tailwind CSS to replicate the exact visual styling of the original Israeli company's website.
 
-The website serves as a marketing platform showcasing Telefire's products and services, including fire detection systems, building management solutions, and security systems. It includes sections for product catalogs, company advantages, sustainability initiatives, and a partnership inquiry form.
+The website serves as a marketing platform for Telefire Mexico, showcasing fire detection systems, IBMS solutions, building management systems, and security products. It includes comprehensive product catalogs, company advantages, sustainability initiatives, case studies, and partnership inquiry forms, all adapted for the Mexican B2B market.
 
 ## User Preferences
 
@@ -29,9 +29,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Component Structure
 - **UI Components**: Comprehensive shadcn/ui component library in `client/src/components/ui/`
-- **Business Components**: Section-based components for different website areas
-- **Navigation**: Responsive navbar with smooth scrolling and mobile menu
+- **Business Components**: Section-based components including Products, Case Studies, IBMS systems
+- **Navigation**: Professional navbar with dropdown menus, decorative elements, and enhanced mobile hamburger menu
 - **Forms**: Partnership inquiry form with validation and submission handling
+- **Product Catalog**: Complete product sections for panels, detectors, IBMS systems, and frontend solutions
+- **Case Studies**: Mexican market case studies with real project examples
 
 ### Data Layer
 - **Schema Definition**: Shared TypeScript types and Zod schemas in `shared/schema.ts`
@@ -43,6 +45,8 @@ Preferred communication style: Simple, everyday language.
 - **Path Aliases**: Configured import aliases for clean code organization
 - **Error Handling**: Comprehensive error boundaries and API error handling
 - **Development Tools**: Replit-specific development enhancements and runtime error overlay
+- **Visual Effects**: Custom CSS animations, hover effects, and decorative elements matching original design
+- **Responsive Design**: Mobile-first design with professional hamburger menu and smooth transitions
 
 ## External Dependencies
 

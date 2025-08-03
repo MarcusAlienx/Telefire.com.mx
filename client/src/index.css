@@ -106,6 +106,83 @@
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Decorative side elements */
+  .side-element {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    opacity: 0.1;
+    z-index: 0;
+  }
+  
+  .side-element-left {
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .side-element-right {
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Plus icon decorations */
+  .plus-decoration {
+    position: relative;
+  }
+  
+  .plus-decoration::before {
+    content: '+';
+    position: absolute;
+    font-size: 48px;
+    color: var(--telefire-blue);
+    opacity: 0.1;
+    font-weight: bold;
+    z-index: 0;
+  }
+  
+  .hamburger-menu {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Product hover effects */
+  .product-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Navigation dropdown styling */
+  .nav-dropdown {
+    animation: slideDown 0.2s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile menu slide animation */
+  .mobile-menu-enter {
+    transform: translateX(100%);
+  }
+  
+  .mobile-menu-enter-active {
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+  }
 }
 
 @layer utilities {

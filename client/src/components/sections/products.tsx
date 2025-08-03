@@ -8,7 +8,9 @@ const categories = [
   { id: "all", label: "Todos los productos" },
   { id: "panels", label: "Paneles de Control" },
   { id: "detectors", label: "Detectores" },
-  { id: "accessories", label: "Accesorios y Módulos" }
+  { id: "accessories", label: "Accesorios y Módulos" },
+  { id: "ibms", label: "Sistemas IBMS" },
+  { id: "frontend", label: "Sistemas Frontend" }
 ];
 
 const controlPanels = [
@@ -88,16 +90,76 @@ const accessories = [
   { name: "Bases", description: "Montaje de detectores", icon: Circle, color: "text-gray-600" }
 ];
 
+const ibmsSystems = [
+  {
+    id: "sniper",
+    name: "SNIPER",
+    badge: "IBMS Integrado",
+    badgeColor: "bg-purple-600",
+    description: "Sistema integrado de gestión de edificios que combina seguridad y eficiencia operacional con capacidades de vanguardia.",
+    certification: "Gestión Unificada",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "ibms"
+  },
+  {
+    id: "bms-integration",
+    name: "Integración BMS",
+    badge: "Conectividad",
+    badgeColor: "bg-telefire-blue",
+    description: "Plataforma abierta para integración con controladores de terceros, proporcionando una vista unificada.",
+    certification: "API Abierta",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "ibms"
+  }
+];
+
+const frontendSystems = [
+  {
+    id: "alerto-plus",
+    name: "Alerto+",
+    badge: "Usuario Final",
+    badgeColor: "bg-green-600",
+    description: "Solución orientada al usuario final para mejorar la accesibilidad en detección y control de incendios.",
+    certification: "Interfaz Intuitiva",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "frontend"
+  },
+  {
+    id: "see-system",
+    name: "SEE",
+    badge: "Monitoreo",
+    badgeColor: "bg-orange-600",
+    description: "Sistema de monitoreo avanzado con capacidades de visualización en tiempo real.",
+    certification: "Tiempo Real",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "frontend"
+  }
+];
+
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filteredPanels = activeCategory === "all" || activeCategory === "panels" ? controlPanels : [];
   const filteredDetectors = activeCategory === "all" || activeCategory === "detectors" ? detectors : [];
+  const filteredIbms = activeCategory === "all" || activeCategory === "ibms" ? ibmsSystems : [];
+  const filteredFrontend = activeCategory === "all" || activeCategory === "frontend" ? frontendSystems : [];
   const showAccessories = activeCategory === "all" || activeCategory === "accessories";
 
   return (
-    <section id="productos" className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="productos" className="py-20 bg-gray-50 relative">
+      {/* Decorative side elements */}
+      <div className="absolute left-4 top-1/4 opacity-10">
+        <svg width="40" height="100" viewBox="0 0 40 100" className="text-telefire-blue">
+          <path d="M0,0 L40,50 L0,100" fill="none" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      </div>
+      <div className="absolute right-4 top-1/3 opacity-10">
+        <svg width="40" height="80" viewBox="0 0 40 80" className="text-telefire-blue">
+          <path d="M40,0 L0,40 L40,80" fill="none" stroke="currentColor" strokeWidth="2"/>
+        </svg>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 section-reveal">
           <div className="text-telefire-blue font-semibold text-sm uppercase tracking-wide mb-4">NUESTROS PRODUCTOS</div>
           <h2 className="text-4xl font-bold text-gray-900 mb-6">Productos de Protección contra Incendios</h2>
@@ -142,7 +204,7 @@ export default function Products() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPanels.map((panel) => (
-                <Card key={panel.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <Card key={panel.id} className="group product-card">
                   <CardHeader className="p-0">
                     <img 
                       src={panel.image} 
@@ -190,7 +252,7 @@ export default function Products() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredDetectors.map((detector) => (
-                <Card key={detector.id} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <Card key={detector.id} className="group product-card">
                   <CardHeader className="p-0">
                     <img 
                       src={detector.image} 
@@ -208,6 +270,102 @@ export default function Products() {
                     <Button size="sm" className="w-full bg-telefire-blue hover:bg-blue-700">
                       Ver especificaciones
                     </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* IBMS Systems */}
+        {filteredIbms.length > 0 && (
+          <div className="mb-16 section-reveal">
+            <div className="flex items-center mb-8">
+              <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mr-4">
+                <Layers className="text-white h-6 w-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Sistemas IBMS</h3>
+            </div>
+            <p className="text-gray-600 mb-8">
+              Desarrollador experimentado de software avanzado y probado de Sistema Integrado de Gestión de Edificios (IBMS), 
+              integrando sin problemas la seguridad y la eficiencia operacional.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {filteredIbms.map((system) => (
+                <Card key={system.id} className="group product-card">
+                  <CardHeader className="p-0">
+                    <img 
+                      src={system.image} 
+                      alt={system.name} 
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-xl font-bold text-gray-900">{system.name}</h4>
+                      <Badge className={`${system.badgeColor} text-white`}>
+                        {system.badge}
+                      </Badge>
+                    </div>
+                    <p className="text-gray-600 mb-4">{system.description}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Tag className="mr-2 h-4 w-4" />
+                        <span>{system.certification}</span>
+                      </div>
+                      <Button variant="ghost" className="text-telefire-blue font-semibold hover:text-telefire-red">
+                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Frontend Systems */}
+        {filteredFrontend.length > 0 && (
+          <div className="mb-16 section-reveal">
+            <div className="flex items-center mb-8">
+              <div className="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mr-4">
+                <Activity className="text-white h-6 w-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Sistemas Frontend</h3>
+            </div>
+            <p className="text-gray-600 mb-8">
+              La categoría de Sistemas Frontend comprende soluciones orientadas al usuario como Alerto+ para usuarios finales, 
+              SEE y el Módulo de Incendios Sniper, diseñados para mejorar la accesibilidad y usabilidad.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {filteredFrontend.map((system) => (
+                <Card key={system.id} className="group product-card">
+                  <CardHeader className="p-0">
+                    <img 
+                      src={system.image} 
+                      alt={system.name} 
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-xl font-bold text-gray-900">{system.name}</h4>
+                      <Badge className={`${system.badgeColor} text-white`}>
+                        {system.badge}
+                      </Badge>
+                    </div>
+                    <p className="text-gray-600 mb-4">{system.description}</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Tag className="mr-2 h-4 w-4" />
+                        <span>{system.certification}</span>
+                      </div>
+                      <Button variant="ghost" className="text-telefire-blue font-semibold hover:text-telefire-red">
+                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}

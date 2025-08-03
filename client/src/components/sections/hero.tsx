@@ -24,7 +24,15 @@ export default function Hero() {
       <div className="absolute top-20 left-10 w-20 h-20 opacity-20">
         <svg viewBox="0 0 100 100" className="w-full h-full text-white">
           <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" strokeWidth="2"/>
-          <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="2"/>
+          <circle cx="50" cy="50" r="20" fill="none" stroke="currentColor" strokeWidth="1"/>
+          <circle cx="50" cy="50" r="5" fill="currentColor"/>
+        </svg>
+      </div>
+      
+      <div className="absolute bottom-32 right-20 w-16 h-16 opacity-10">
+        <svg viewBox="0 0 100 100" className="w-full h-full text-white">
+          <path d="M20,20 L80,20 L80,80 L20,80 Z" fill="none" stroke="currentColor" strokeWidth="2"/>
+          <path d="M35,35 L65,35 L65,65 L35,65 Z" fill="none" stroke="currentColor" strokeWidth="1"/>
         </svg>
       </div>
       

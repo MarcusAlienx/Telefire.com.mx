@@ -25,8 +25,19 @@ const advantages = [
 
 export default function Advantages() {
   return (
-    <section id="ventajas" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ventajas" className="py-20 bg-white relative">
+      {/* Decorative elements */}
+      <div className="absolute top-10 left-10 opacity-5">
+        <div className="text-6xl font-bold text-telefire-blue">+</div>
+      </div>
+      <div className="absolute top-32 right-20 opacity-5">
+        <div className="text-6xl font-bold text-telefire-blue">+</div>
+      </div>
+      <div className="absolute bottom-20 left-32 opacity-5">
+        <div className="text-6xl font-bold text-telefire-blue">+</div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 section-reveal">
           <div className="text-telefire-blue font-semibold text-sm uppercase tracking-wide mb-4">POR QUÉ TELEFIRE</div>
           <h2 className="text-4xl font-bold text-gray-900 mb-6">Nuestras Ventajas</h2>

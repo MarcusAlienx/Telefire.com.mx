@@ -112,17 +112,15 @@ export default function Navbar() {
               size="sm"
               className="bg-telefire-red text-white hover:bg-red-700 text-sm font-semibold px-4"
             >
-              HAZTE SOCIO
+              COTIZA AHORA
             </Button>
             <Button 
               variant="outline" 
               size="sm"
               className="border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-semibold px-4"
-              asChild
+              onClick={() => scrollToSection('#socio')}
             >
-              <a href="https://telefire.co.il/" target="_blank" rel="noopener noreferrer">
-                SITIO IL
-              </a>
+              Hazte Socio
             </Button>
             <div className="w-px h-6 bg-gray-300 mx-2"></div>
             <Button
@@ -205,18 +203,18 @@ export default function Navbar() {
                         onClick={() => scrollToSection('#socio')}
                         className="w-full bg-telefire-red text-white hover:bg-red-700"
                       >
-                        HAZTE SOCIO
+                        COTIZA AHORA
                       </Button>
                     </SheetClose>
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
-                      asChild
-                    >
-                      <a href="https://telefire.co.il/" target="_blank" rel="noopener noreferrer">
-                        SITIO IL
-                      </a>
-                    </Button>
+                    <SheetClose asChild>
+                      <Button 
+                        variant="outline" 
+                        className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
+                        onClick={() => scrollToSection('#socio')}
+                      >
+                        Hazte Socio
+                      </Button>
+                    </SheetClose>
                     
                     {/* Mobile Social Links */}
                     <div className="flex justify-center pt-4">

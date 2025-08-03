@@ -134,16 +134,14 @@ export default function Footer() {
                 className="w-full bg-telefire-red hover:bg-red-700"
                 onClick={() => scrollToSection('#socio')}
               >
-                HAZTE SOCIO
+                COTIZA AHORA
               </Button>
               <Button 
                 variant="outline" 
                 className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
-                asChild
+                onClick={() => scrollToSection('#socio')}
               >
-                <a href="https://telefire.co.il/" target="_blank" rel="noopener noreferrer">
-                  SITIO IL
-                </a>
+                Hazte Socio
               </Button>
             </div>
           </div>

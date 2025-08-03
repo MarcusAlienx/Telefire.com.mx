@@ -56,19 +56,18 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Button 
               size="lg"
-              className="bg-white text-telefire-blue hover:bg-gray-100 shadow-lg"
-              onClick={() => window.open('https://www.youtube.com/watch?v=AJ1xJkYsYJg', '_blank')}
+              className="bg-telefire-red text-white hover:bg-red-700 shadow-lg"
+              onClick={() => scrollToSection('#socio')}
             >
-              <Play className="mr-2 h-5 w-5 text-telefire-red" />
-              Ver el video completo
+              Cotiza Ahora
             </Button>
             <Button 
               size="lg"
               variant="outline" 
               className="border-2 border-white text-white hover:bg-white hover:text-telefire-blue"
-              onClick={() => scrollToSection('#soluciones')}
+              onClick={() => scrollToSection('#productos')}
             >
-              Descubrir más
+              Ver Productos
             </Button>
           </div>
         </div>

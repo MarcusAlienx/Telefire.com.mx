@@ -56,6 +56,33 @@ export default function Navbar() {
     }
   };
 
+  const scrollToProductCategory = (category: string) => {
+    // First navigate to products section
+    const element = document.querySelector('#productos');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Map category IDs to product filter categories
+      const categoryMap: { [key: string]: string } = {
+        'productos-paneles': 'panels',
+        'productos-detectores': 'detectors', 
+        'productos-ibms': 'ibms',
+        'productos-extincion': 'extinguishing',
+        'productos-servicios': 'services'
+      };
+      
+      const targetCategory = categoryMap[category];
+      if (targetCategory) {
+        // Dispatch custom event to update product category
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('setProductCategory', { 
+            detail: { category: targetCategory } 
+          }));
+        }, 800);
+      }
+    }
+  };
+
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white shadow-lg' : 'bg-white/95 backdrop-blur-sm'
@@ -95,7 +122,13 @@ export default function Navbar() {
                         {item.dropdown.map((dropdownItem) => (
                           <DropdownMenuItem 
                             key={dropdownItem.id}
-                            onClick={() => scrollToSection(dropdownItem.href)}
+                            onClick={() => {
+                              if (dropdownItem.id.startsWith('productos-')) {
+                                scrollToProductCategory(dropdownItem.id);
+                              } else {
+                                scrollToSection(dropdownItem.href);
+                              }
+                            }}
                             className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium text-sm py-2 px-3"
                           >
                             {dropdownItem.label}
@@ -182,7 +215,13 @@ export default function Navbar() {
                           {item.dropdown.map((dropdownItem) => (
                             <SheetClose key={dropdownItem.id} asChild>
                               <button
-                                onClick={() => scrollToSection(dropdownItem.href)}
+                                onClick={() => {
+                                  if (dropdownItem.id.startsWith('productos-')) {
+                                    scrollToProductCategory(dropdownItem.id);
+                                  } else {
+                                    scrollToSection(dropdownItem.href);
+                                  }
+                                }}
                                 className="text-left text-gray-600 hover:text-telefire-blue transition-colors py-2 pl-4 w-full"
                               >
                                 {dropdownItem.label}

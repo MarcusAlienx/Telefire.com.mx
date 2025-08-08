@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -348,6 +348,18 @@ const frontendSystems = [
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [cartItems, setCartItems] = useState<string[]>([]);
+
+  // Listen for category changes from navigation
+  useEffect(() => {
+    const handleCategoryChange = (event: CustomEvent) => {
+      setActiveCategory(event.detail.category);
+    };
+
+    window.addEventListener('setProductCategory', handleCategoryChange as EventListener);
+    return () => {
+      window.removeEventListener('setProductCategory', handleCategoryChange as EventListener);
+    };
+  }, []);
 
   const updateCartCounter = () => {
     const cartCounter = document.querySelector('#cart-counter') as HTMLElement;

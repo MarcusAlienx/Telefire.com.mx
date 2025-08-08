@@ -40,12 +40,12 @@ export default function Hero() {
       <div className="relative z-10 text-center text-white px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         <div className="animate-fade-in-up">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            PROTECCIÓN CONTRA INCENDIOS,<br/>
+            <span className="text-shadow-lg drop-shadow-lg">PROTECCIÓN CONTRA INCENDIOS,</span><br/>
             <span className="text-blue-300">GESTIÓN DE EDIFICIOS</span><br/>
-            Y SEGURIDAD
+            <span className="text-shadow-lg drop-shadow-lg">Y SEGURIDAD</span>
           </h1>
           
-          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-md bg-white/10 border border-white/20">
+          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-md bg-white/20 border border-white/30">
             <h2 className="text-2xl font-semibold mb-4">Todo en una sola plataforma IBMS</h2>
             <p className="text-lg opacity-90">
               Telefire desarrolla y fabrica soluciones para edificios inteligentes 

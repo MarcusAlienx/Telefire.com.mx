@@ -438,8 +438,10 @@ export default function Products() {
   const filteredServices = activeCategory === "all" || activeCategory === "services" ? cloudServices : [];
   const showAccessories = activeCategory === "all" || activeCategory === "accessories";
 
+
+
   return (
-    <section id="productos" className="py-20 bg-gray-50 relative">
+    <section id="productos" className="py-20 bg-gray-50 relative min-h-screen">
       {/* Decorative side elements */}
       <div className="absolute left-4 top-1/4 opacity-10">
         <svg width="40" height="100" viewBox="0 0 40 100" className="text-telefire-blue">

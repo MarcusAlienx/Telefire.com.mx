@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
-import { Menu, Linkedin, ChevronDown, X } from "lucide-react";
+import { Menu, ChevronDown, X } from "lucide-react";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -113,33 +113,22 @@ export default function Navbar() {
             </div>
           </div>
           
-          {/* Right side buttons and social */}
+          {/* Right side buttons */}
           <div className="hidden lg:flex items-center space-x-4">
             <Button 
               onClick={() => scrollToSection('#socio')}
               size="sm"
-              className="bg-telefire-red text-white hover:bg-red-700 text-xs font-semibold px-3 py-1.5"
+              className="bg-telefire-red text-white hover:bg-red-700 text-sm font-semibold px-4 py-2"
             >
-              COTIZA AHORA
+              Cotiza Ahora
             </Button>
             <Button 
               variant="outline" 
               size="sm"
-              className="border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-xs font-semibold px-3 py-1.5"
+              className="border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-semibold px-4 py-2"
               onClick={() => scrollToSection('#socio')}
             >
-              Hazte Socio
-            </Button>
-            <div className="w-px h-6 bg-gray-300 mx-2"></div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="w-8 h-8 text-telefire-blue hover:bg-telefire-blue hover:text-white"
-              asChild
-            >
-              <a href="https://www.linkedin.com/company/telefire-fire-&-gas-detectors" target="_blank" rel="noopener noreferrer">
-                <Linkedin className="h-4 w-4" />
-              </a>
+              Ser Socio
             </Button>
           </div>
           
@@ -211,7 +200,7 @@ export default function Navbar() {
                         onClick={() => scrollToSection('#socio')}
                         className="w-full bg-telefire-red text-white hover:bg-red-700"
                       >
-                        COTIZA AHORA
+                        Cotiza Ahora
                       </Button>
                     </SheetClose>
                     <SheetClose asChild>
@@ -220,23 +209,9 @@ export default function Navbar() {
                         className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
                         onClick={() => scrollToSection('#socio')}
                       >
-                        Hazte Socio
+                        Ser Socio
                       </Button>
                     </SheetClose>
-                    
-                    {/* Mobile Social Links */}
-                    <div className="flex justify-center pt-4">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="w-10 h-10 text-telefire-blue hover:bg-telefire-blue hover:text-white"
-                        asChild
-                      >
-                        <a href="https://www.linkedin.com/company/telefire-fire-&-gas-detectors" target="_blank" rel="noopener noreferrer">
-                          <Linkedin className="h-5 w-5" />
-                        </a>
-                      </Button>
-                    </div>
                   </div>
                 </div>
               </SheetContent>

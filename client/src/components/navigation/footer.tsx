@@ -134,14 +134,14 @@ export default function Footer() {
                 className="w-full bg-telefire-red hover:bg-red-700"
                 onClick={() => scrollToSection('#socio')}
               >
-                COTIZA AHORA
+                Cotiza Ahora
               </Button>
               <Button 
                 variant="outline" 
                 className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
                 onClick={() => scrollToSection('#socio')}
               >
-                Hazte Socio
+                Ser Socio
               </Button>
             </div>
           </div>

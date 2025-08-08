@@ -10,29 +10,31 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const navItems = [
-  { href: "#soluciones", label: "Soluciones" },
+  { href: "#soluciones", label: "Soluciones", id: "soluciones" },
   { 
     label: "Productos", 
     href: "#productos",
+    id: "productos-menu",
     dropdown: [
-      { href: "#productos", label: "Paneles de Control" },
-      { href: "#productos", label: "Detectores" },
-      { href: "#productos", label: "Sistemas IBMS" },
-      { href: "#productos", label: "Sistemas de Extinción" },
-      { href: "#productos", label: "Servicios en la Nube" }
+      { href: "#productos", label: "Paneles de Control", id: "productos-paneles" },
+      { href: "#productos", label: "Detectores", id: "productos-detectores" },
+      { href: "#productos", label: "Sistemas IBMS", id: "productos-ibms" },
+      { href: "#productos", label: "Sistemas de Extinción", id: "productos-extincion" },
+      { href: "#productos", label: "Servicios en la Nube", id: "productos-servicios" }
     ]
   },
-  { href: "#ventajas", label: "Ventajas" },
-  { href: "#seguridad-incendios", label: "Protección contra Incendios" },
+  { href: "#ventajas", label: "Ventajas", id: "ventajas" },
+  { href: "#seguridad-incendios", label: "Protección contra Incendios", id: "seguridad-incendios" },
   { 
     label: "Empresa", 
+    id: "empresa-menu",
     dropdown: [
-      { href: "#contacto", label: "Acerca de" },
-      { href: "#casos-exito", label: "Casos de Éxito" },
-      { href: "#sostenibilidad", label: "Sostenibilidad" }
+      { href: "#contacto", label: "Acerca de", id: "empresa-contacto" },
+      { href: "#casos-exito", label: "Casos de Éxito", id: "empresa-casos" },
+      { href: "#sostenibilidad", label: "Sostenibilidad", id: "empresa-sostenibilidad" }
     ]
   },
-  { href: "#aplicaciones", label: "Aplicaciones" }
+  { href: "#aplicaciones", label: "Aplicaciones", id: "aplicaciones" }
 ];
 
 export default function Navbar() {
@@ -84,7 +86,7 @@ export default function Navbar() {
               <div className="flex items-center space-x-6">
                 {navItems.map((item) => (
                   item.dropdown ? (
-                    <DropdownMenu key={item.label}>
+                    <DropdownMenu key={item.id}>
                       <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2">
                         {item.label}
                         <ChevronDown className="ml-1 h-3 w-3" />
@@ -92,7 +94,7 @@ export default function Navbar() {
                       <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 nav-dropdown min-w-[180px]">
                         {item.dropdown.map((dropdownItem) => (
                           <DropdownMenuItem 
-                            key={dropdownItem.href}
+                            key={dropdownItem.id}
                             onClick={() => scrollToSection(dropdownItem.href)}
                             className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium text-sm py-2 px-3"
                           >
@@ -103,7 +105,7 @@ export default function Navbar() {
                     </DropdownMenu>
                   ) : (
                     <button
-                      key={item.href}
+                      key={item.id}
                       onClick={() => scrollToSection(item.href)}
                       className="text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2"
                     >
@@ -173,12 +175,12 @@ export default function Navbar() {
                   <div className="flex flex-col space-y-1 py-6 flex-1">
                     {navItems.map((item) => (
                       item.dropdown ? (
-                        <div key={item.label} className="space-y-2">
+                        <div key={item.id} className="space-y-2">
                           <div className="font-semibold text-gray-900 py-2 border-b border-gray-100">
                             {item.label}
                           </div>
                           {item.dropdown.map((dropdownItem) => (
-                            <SheetClose key={dropdownItem.href} asChild>
+                            <SheetClose key={dropdownItem.id} asChild>
                               <button
                                 onClick={() => scrollToSection(dropdownItem.href)}
                                 className="text-left text-gray-600 hover:text-telefire-blue transition-colors py-2 pl-4 w-full"
@@ -189,7 +191,7 @@ export default function Navbar() {
                           ))}
                         </div>
                       ) : (
-                        <SheetClose key={item.href} asChild>
+                        <SheetClose key={item.id} asChild>
                           <button
                             onClick={() => scrollToSection(item.href)}
                             className="text-left text-gray-700 hover:text-telefire-blue transition-colors font-medium py-3 border-b border-gray-100"

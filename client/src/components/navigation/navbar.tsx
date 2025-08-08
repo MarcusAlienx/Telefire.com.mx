@@ -15,11 +15,11 @@ const navItems = [
     label: "Productos", 
     href: "#productos",
     dropdown: [
-      { href: "#productos-paneles", label: "Paneles de Control" },
-      { href: "#productos-detectores", label: "Detectores" },
-      { href: "#productos-ibms", label: "Sistemas IBMS" },
-      { href: "#productos-extincion", label: "Sistemas de Extinción" },
-      { href: "#productos-servicios", label: "Servicios en la Nube" }
+      { href: "#productos", label: "Paneles de Control" },
+      { href: "#productos", label: "Detectores" },
+      { href: "#productos", label: "Sistemas IBMS" },
+      { href: "#productos", label: "Sistemas de Extinción" },
+      { href: "#productos", label: "Servicios en la Nube" }
     ]
   },
   { href: "#ventajas", label: "Ventajas" },
@@ -79,58 +79,66 @@ export default function Navbar() {
           </div>
           
           {/* Desktop Menu */}
-          <div className="hidden lg:block">
-            <div className="ml-8 flex items-center space-x-6">
-              {navItems.map((item) => (
-                item.dropdown ? (
-                  <DropdownMenu key={item.label}>
-                    <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2">
+          <div className="hidden lg:block flex-1">
+            <div className="ml-8 flex items-center justify-between">
+              <div className="flex items-center space-x-6">
+                {navItems.map((item) => (
+                  item.dropdown ? (
+                    <DropdownMenu key={item.label}>
+                      <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2">
+                        {item.label}
+                        <ChevronDown className="ml-1 h-3 w-3" />
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 nav-dropdown min-w-[180px]">
+                        {item.dropdown.map((dropdownItem) => (
+                          <DropdownMenuItem 
+                            key={dropdownItem.href}
+                            onClick={() => scrollToSection(dropdownItem.href)}
+                            className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium text-sm py-2 px-3"
+                          >
+                            {dropdownItem.label}
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  ) : (
+                    <button
+                      key={item.href}
+                      onClick={() => scrollToSection(item.href)}
+                      className="text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2"
+                    >
                       {item.label}
-                      <ChevronDown className="ml-1 h-3 w-3" />
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 nav-dropdown min-w-[180px]">
-                      {item.dropdown.map((dropdownItem) => (
-                        <DropdownMenuItem 
-                          key={dropdownItem.href}
-                          onClick={() => scrollToSection(dropdownItem.href)}
-                          className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium text-sm py-2 px-3"
-                        >
-                          {dropdownItem.label}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ) : (
-                  <button
-                    key={item.href}
-                    onClick={() => scrollToSection(item.href)}
-                    className="text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2"
-                  >
-                    {item.label}
-                  </button>
-                )
-              ))}
+                    </button>
+                  )
+                ))}
+              </div>
+              
+              {/* Right side buttons */}
+              <div className="flex items-center space-x-3 ml-8">
+                <div id="cart-counter" className="hidden bg-telefire-red text-white rounded-full px-2 py-1 text-xs font-semibold cursor-pointer hover:bg-red-700 transition-colors" 
+                     onClick={() => scrollToSection('#socio')}>
+                  🛒 <span id="cart-count">0</span>
+                </div>
+                <Button 
+                  onClick={() => scrollToSection('#socio')}
+                  size="sm"
+                  className="bg-telefire-red text-white hover:bg-red-700 text-sm font-medium px-5 py-2 h-9"
+                >
+                  Cotiza Ahora
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  className="border-2 border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-medium px-5 py-2 h-9"
+                  onClick={() => scrollToSection('#socio')}
+                >
+                  Hazte Socio
+                </Button>
+              </div>
             </div>
           </div>
           
-          {/* Right side buttons */}
-          <div className="hidden lg:flex items-center space-x-3">
-            <Button 
-              onClick={() => scrollToSection('#socio')}
-              size="sm"
-              className="bg-telefire-red text-white hover:bg-red-700 text-sm font-medium px-5 py-2 h-9"
-            >
-              Cotiza Ahora
-            </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="border-2 border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-medium px-5 py-2 h-9"
-              onClick={() => scrollToSection('#socio')}
-            >
-              Hazte Socio
-            </Button>
-          </div>
+
           
           {/* Mobile menu button */}
           <div className="lg:hidden">

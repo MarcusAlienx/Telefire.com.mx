@@ -349,6 +349,25 @@ export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [cartItems, setCartItems] = useState<string[]>([]);
 
+  const updateCartCounter = () => {
+    const cartCounter = document.querySelector('#cart-counter') as HTMLElement;
+    const cartCount = document.querySelector('#cart-count') as HTMLElement;
+    const quoteItems = document.querySelectorAll('#quote-items li');
+    
+    if (cartCounter && cartCount) {
+      const itemCount = quoteItems.length;
+      cartCount.textContent = itemCount.toString();
+      
+      if (itemCount > 0) {
+        cartCounter.classList.remove('hidden');
+        cartCounter.classList.add('flex');
+      } else {
+        cartCounter.classList.add('hidden');
+        cartCounter.classList.remove('flex');
+      }
+    }
+  };
+
   const addToCart = (productId: string, productName: string) => {
     setCartItems(prev => [...prev, productId]);
     
@@ -370,11 +389,24 @@ export default function Products() {
           <button class="text-red-500 hover:text-red-700 text-sm font-semibold" onclick="this.parentElement.remove(); 
             if (document.querySelectorAll('#quote-items li').length === 0) { 
               document.querySelector('#quote-list').style.display = 'none'; 
+            }
+            // Update counter after removal
+            const cartCounter = document.querySelector('#cart-counter');
+            const cartCount = document.querySelector('#cart-count');
+            const remainingItems = document.querySelectorAll('#quote-items li');
+            if (cartCounter && cartCount) {
+              const itemCount = remainingItems.length;
+              cartCount.textContent = itemCount.toString();
+              if (itemCount === 0) {
+                cartCounter.classList.add('hidden');
+                cartCounter.classList.remove('flex');
+              }
             }">
             Eliminar
           </button>
         `;
         quoteItems.appendChild(listItem);
+        updateCartCounter();
       }
     }
     

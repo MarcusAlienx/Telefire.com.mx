@@ -15,11 +15,11 @@ const navItems = [
     label: "Productos", 
     href: "#productos",
     dropdown: [
-      { href: "#productos", label: "Paneles de Control" },
-      { href: "#productos", label: "Detectores" },
-      { href: "#productos", label: "Sistemas IBMS" },
-      { href: "#productos", label: "Sistemas de Extinción" },
-      { href: "#productos", label: "Servicios en la Nube" }
+      { href: "#productos-paneles", label: "Paneles de Control" },
+      { href: "#productos-detectores", label: "Detectores" },
+      { href: "#productos-ibms", label: "Sistemas IBMS" },
+      { href: "#productos-extincion", label: "Sistemas de Extinción" },
+      { href: "#productos-servicios", label: "Servicios en la Nube" }
     ]
   },
   { href: "#ventajas", label: "Ventajas" },
@@ -28,7 +28,7 @@ const navItems = [
     label: "Empresa", 
     dropdown: [
       { href: "#contacto", label: "Acerca de" },
-      { href: "#casos-estudio", label: "Casos de Estudio" },
+      { href: "#casos-exito", label: "Casos de Éxito" },
       { href: "#sostenibilidad", label: "Sostenibilidad" }
     ]
   },
@@ -67,7 +67,7 @@ export default function Navbar() {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-18">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
             <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('#inicio')}>
@@ -80,20 +80,20 @@ export default function Navbar() {
           
           {/* Desktop Menu */}
           <div className="hidden lg:block">
-            <div className="ml-10 flex items-center space-x-8">
+            <div className="ml-8 flex items-center space-x-6">
               {navItems.map((item) => (
                 item.dropdown ? (
                   <DropdownMenu key={item.label}>
-                    <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-telefire-blue transition-colors font-semibold text-sm tracking-wide py-2">
+                    <DropdownMenuTrigger className="flex items-center text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2">
                       {item.label}
-                      <ChevronDown className="ml-1 h-4 w-4" />
+                      <ChevronDown className="ml-1 h-3 w-3" />
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 nav-dropdown min-w-[200px]">
+                    <DropdownMenuContent className="bg-white shadow-lg border border-gray-200 nav-dropdown min-w-[180px]">
                       {item.dropdown.map((dropdownItem) => (
                         <DropdownMenuItem 
                           key={dropdownItem.href}
-                          onClick={() => scrollToSection(dropdownItem.href)}
-                          className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium py-3 px-4"
+                          onClick={() => scrollToSection('#productos')}
+                          className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium text-sm py-2 px-3"
                         >
                           {dropdownItem.label}
                         </DropdownMenuItem>
@@ -104,7 +104,7 @@ export default function Navbar() {
                   <button
                     key={item.href}
                     onClick={() => scrollToSection(item.href)}
-                    className="text-gray-700 hover:text-telefire-blue transition-colors font-semibold text-sm tracking-wide py-2"
+                    className="text-gray-700 hover:text-telefire-blue transition-colors font-medium text-sm py-2"
                   >
                     {item.label}
                   </button>
@@ -118,14 +118,14 @@ export default function Navbar() {
             <Button 
               onClick={() => scrollToSection('#socio')}
               size="sm"
-              className="bg-telefire-red text-white hover:bg-red-700 text-sm font-bold px-5 py-2 tracking-wide"
+              className="bg-telefire-red text-white hover:bg-red-700 text-xs font-semibold px-3 py-1.5"
             >
               COTIZA AHORA
             </Button>
             <Button 
               variant="outline" 
               size="sm"
-              className="border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-bold px-5 py-2 tracking-wide"
+              className="border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-xs font-semibold px-3 py-1.5"
               onClick={() => scrollToSection('#socio')}
             >
               Hazte Socio

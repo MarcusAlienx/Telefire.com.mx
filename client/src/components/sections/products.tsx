@@ -303,6 +303,7 @@ const ibmsSystems = [
     badgeColor: "bg-purple-600",
     description: "Sistema integrado de gestión de edificios que combina seguridad y eficiencia operacional con capacidades de vanguardia.",
     certification: "Gestión Unificada",
+    price: "Consultar",
     image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
     category: "ibms"
   },
@@ -314,7 +315,8 @@ const ibmsSystems = [
     description: "Plataforma abierta para integración con controladores de terceros, proporcionando una vista unificada.",
     certification: "API Abierta",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    category: "ibms"
+    category: "ibms",
+    price: "Consultar"
   }
 ];
 
@@ -327,7 +329,8 @@ const frontendSystems = [
     description: "Solución orientada al usuario final para mejorar la accesibilidad en detección y control de incendios.",
     certification: "Interfaz Intuitiva",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    category: "frontend"
+    category: "frontend",
+    price: "Consultar"
   },
   {
     id: "see-system",
@@ -337,7 +340,8 @@ const frontendSystems = [
     description: "Sistema de monitoreo avanzado con capacidades de visualización en tiempo real.",
     certification: "Tiempo Real",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    category: "frontend"
+    category: "frontend",
+    price: "Consultar"
   }
 ];
 
@@ -347,6 +351,33 @@ export default function Products() {
 
   const addToCart = (productId: string, productName: string) => {
     setCartItems(prev => [...prev, productId]);
+    
+    // Show quote list and add item
+    const quoteList = document.querySelector('#quote-list') as HTMLElement;
+    const quoteItems = document.querySelector('#quote-items') as HTMLElement;
+    
+    if (quoteList && quoteItems) {
+      quoteList.style.display = 'block';
+      
+      // Check if item already exists
+      const existingItem = quoteItems.querySelector(`[data-product-id="${productId}"]`);
+      if (!existingItem) {
+        const listItem = document.createElement('li');
+        listItem.setAttribute('data-product-id', productId);
+        listItem.className = 'flex items-center justify-between bg-white rounded px-3 py-2 border border-green-200';
+        listItem.innerHTML = `
+          <span class="font-medium">${productName}</span>
+          <button class="text-red-500 hover:text-red-700 text-sm font-semibold" onclick="this.parentElement.remove(); 
+            if (document.querySelectorAll('#quote-items li').length === 0) { 
+              document.querySelector('#quote-list').style.display = 'none'; 
+            }">
+            Eliminar
+          </button>
+        `;
+        quoteItems.appendChild(listItem);
+      }
+    }
+    
     // Scroll to quote form
     const element = document.querySelector('#socio');
     if (element) {
@@ -357,9 +388,9 @@ export default function Products() {
         const messageTextarea = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
         if (messageTextarea) {
           const currentMessage = messageTextarea.value;
-          const productLine = `\n• ${productName} - Solicitud de cotización`;
+          const productLine = `• ${productName} - Solicitud de cotización`;
           if (!currentMessage.includes(productName)) {
-            messageTextarea.value = currentMessage + productLine;
+            messageTextarea.value = currentMessage + "\n" + productLine;
             messageTextarea.dispatchEvent(new Event('input', { bubbles: true }));
           }
         }
@@ -593,7 +624,7 @@ export default function Products() {
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{system.certification}</span>
                       </div>
-                      <span className="text-lg font-bold text-telefire-blue">{system.price || "Consultar"}</span>
+                      <span className="text-lg font-bold text-telefire-blue">Consultar</span>
                     </div>
                     <div className="flex gap-2">
                       <Button 

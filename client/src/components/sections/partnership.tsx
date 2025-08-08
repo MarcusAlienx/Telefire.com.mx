@@ -61,12 +61,12 @@ export default function Partnership() {
           {/* Content */}
           <div className="text-white section-reveal">
             <div className="text-blue-200 font-semibold text-sm uppercase tracking-wide mb-4">TRABAJA CON TELEFIRE</div>
-            <h2 className="text-4xl font-bold mb-6">Buscamos Socios</h2>
+            <h2 className="text-4xl font-bold mb-6">Buscamos Socios Integradores</h2>
             <p className="text-xl text-blue-100 mb-6">
-              Buscamos socios locales en Europa, Asia y América.
+              Buscamos socios integradores especializados en México.
             </p>
             <p className="text-blue-100 mb-8 leading-relaxed">
-              ¿Eres instalador o distribuidor de sistemas de detección de incendios y gestión de edificios? 
+              ¿Eres integrador o distribuidor de sistemas de detección de incendios y gestión de edificios en México? 
               Únete a la familia de Telefire y acompáñanos en el camino hacia un mundo en el que todos 
               disfrutemos de total tranquilidad en edificios inteligentes.
             </p>
@@ -96,6 +96,23 @@ export default function Partnership() {
           
           {/* Contact Form */}
           <div className="section-reveal">
+            {/* Quote List */}
+            <div id="quote-list" className="mb-6" style={{ display: 'none' }}>
+              <Card className="bg-green-50 border-green-200">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-lg font-semibold text-green-800 flex items-center">
+                    <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    Productos en Cotización
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <ul id="quote-items" className="space-y-2 text-sm text-green-700">
+                    {/* Items will be added dynamically */}
+                  </ul>
+                </CardContent>
+              </Card>
+            </div>
+
             <Card className="shadow-2xl">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-gray-900">Contacta con Nosotros</CardTitle>

@@ -1,11 +1,57 @@
 import { Button } from "@/components/ui/button";
-import { Play, ChevronDown } from "lucide-react";
+import { Play, ChevronDown, Plus } from "lucide-react";
 
 export default function Hero() {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const addToCart = () => {
+    // Show quote list and add general consultation
+    const quoteList = document.querySelector('#quote-list') as HTMLElement;
+    const quoteItems = document.querySelector('#quote-items') as HTMLElement;
+    
+    if (quoteList && quoteItems) {
+      quoteList.style.display = 'block';
+      
+      // Check if general consultation already exists
+      const existingItem = quoteItems.querySelector(`[data-product-id="general-consultation"]`);
+      if (!existingItem) {
+        const listItem = document.createElement('li');
+        listItem.setAttribute('data-product-id', 'general-consultation');
+        listItem.className = 'flex items-center justify-between bg-white rounded px-3 py-2 border border-green-200';
+        listItem.innerHTML = `
+          <span class="font-medium">Consulta General - Productos y Servicios Telefire</span>
+          <button class="text-red-500 hover:text-red-700 text-sm font-semibold" onclick="this.parentElement.remove(); 
+            if (document.querySelectorAll('#quote-items li').length === 0) { 
+              document.querySelector('#quote-list').style.display = 'none'; 
+            }">
+            Eliminar
+          </button>
+        `;
+        quoteItems.appendChild(listItem);
+      }
+    }
+    
+    // Scroll to quote form
+    const element = document.querySelector('#socio');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Add general consultation to message if form exists
+      setTimeout(() => {
+        const messageTextarea = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+        if (messageTextarea) {
+          const consultationText = "• Consulta general sobre productos y servicios Telefire - Solicitud de cotización";
+          if (!messageTextarea.value.includes("Consulta general")) {
+            messageTextarea.value = consultationText + "\n" + messageTextarea.value;
+            messageTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      }, 500);
     }
   };
 
@@ -57,14 +103,15 @@ export default function Hero() {
             <Button 
               size="lg"
               className="bg-telefire-red text-white hover:bg-red-700 shadow-lg"
-              onClick={() => scrollToSection('#socio')}
+              onClick={addToCart}
             >
+              <Plus className="mr-2 h-5 w-5" />
               Cotiza Ahora
             </Button>
             <Button 
               size="lg"
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-telefire-blue"
+              className="border-2 border-white text-white hover:bg-white hover:text-telefire-blue bg-white/10 backdrop-blur-sm"
               onClick={() => scrollToSection('#productos')}
             >
               Ver Productos

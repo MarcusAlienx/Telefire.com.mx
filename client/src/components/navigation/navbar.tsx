@@ -92,7 +92,7 @@ export default function Navbar() {
                       {item.dropdown.map((dropdownItem) => (
                         <DropdownMenuItem 
                           key={dropdownItem.href}
-                          onClick={() => scrollToSection('#productos')}
+                          onClick={() => scrollToSection(dropdownItem.href)}
                           className="cursor-pointer hover:bg-telefire-blue hover:text-white font-medium text-sm py-2 px-3"
                         >
                           {dropdownItem.label}
@@ -114,21 +114,21 @@ export default function Navbar() {
           </div>
           
           {/* Right side buttons */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             <Button 
               onClick={() => scrollToSection('#socio')}
               size="sm"
-              className="bg-telefire-red text-white hover:bg-red-700 text-sm font-semibold px-4 py-2"
+              className="bg-telefire-red text-white hover:bg-red-700 text-sm font-medium px-5 py-2 h-9"
             >
               Cotiza Ahora
             </Button>
             <Button 
               variant="outline" 
               size="sm"
-              className="border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-semibold px-4 py-2"
+              className="border-2 border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white text-sm font-medium px-5 py-2 h-9"
               onClick={() => scrollToSection('#socio')}
             >
-              Ser Socio
+              Hazte Socio
             </Button>
           </div>
           
@@ -209,7 +209,7 @@ export default function Navbar() {
                         className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
                         onClick={() => scrollToSection('#socio')}
                       >
-                        Ser Socio
+                        Hazte Socio
                       </Button>
                     </SheetClose>
                   </div>

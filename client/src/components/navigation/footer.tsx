@@ -141,7 +141,7 @@ export default function Footer() {
                 className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
                 onClick={() => scrollToSection('#socio')}
               >
-                Ser Socio
+                Hazte Socio
               </Button>
             </div>
           </div>

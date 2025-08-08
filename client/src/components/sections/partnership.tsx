@@ -100,9 +100,24 @@ export default function Partnership() {
             <div id="quote-list" className="mb-6" style={{ display: 'none' }}>
               <Card className="bg-green-50 border-green-200">
                 <CardHeader className="pb-3">
-                  <CardTitle className="text-lg font-semibold text-green-800 flex items-center">
-                    <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                    Productos en Cotización
+                  <CardTitle className="text-lg font-semibold text-green-800 flex items-center justify-between">
+                    <div className="flex items-center">
+                      <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                      Productos en Cotización
+                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="text-xs border-green-300 text-green-700 hover:bg-green-100"
+                      onClick={() => {
+                        const element = document.querySelector('#productos');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }}
+                    >
+                      ← Ver Productos
+                    </Button>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="pt-0">

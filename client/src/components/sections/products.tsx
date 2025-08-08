@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Cpu, MapPin, Puzzle, ArrowRight, Tag, Wifi, Activity, Layers, Volume2, Lightbulb, Hand, Plug, Shield as ShieldIcon, Circle } from "lucide-react";
+import { Cpu, MapPin, Puzzle, ArrowRight, Tag, Wifi, Activity, Layers, Volume2, Lightbulb, Hand, Plug, Shield as ShieldIcon, Circle, ShoppingCart, Plus } from "lucide-react";
 
 const categories = [
   { id: "all", label: "Todos los productos" },
@@ -10,84 +10,289 @@ const categories = [
   { id: "detectors", label: "Detectores" },
   { id: "accessories", label: "Accesorios y Módulos" },
   { id: "ibms", label: "Sistemas IBMS" },
-  { id: "frontend", label: "Sistemas Frontend" }
+  { id: "frontend", label: "Sistemas Frontend" },
+  { id: "extinguishing", label: "Sistemas de Extinción" },
+  { id: "services", label: "Servicios en la Nube" }
 ];
 
 const controlPanels = [
   {
-    id: "teleone",
-    name: "TELEONE",
-    badge: "Serie 7000",
+    id: "adr-7000",
+    name: "ADR-7000",
+    badge: "Escala Grande",
+    badgeColor: "bg-telefire-red",
+    description: "Panel avanzado hasta 8 bucles, controla hasta 1,016 dispositivos inteligentes por unidad. Red de hasta 32 paneles. Fuente de 150W expandible.",
+    certification: "UL 864, EN-54, UL-2900",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "panels",
+    price: "Consultar"
+  },
+  {
+    id: "saver-7000",
+    name: "SAVER-7000",
+    badge: "Escala Media",
     badgeColor: "bg-telefire-blue",
-    description: "Panel de control de detección de incendios analógico direccionable avanzado con capacidad para múltiples zonas.",
-    certification: "EN-54 | UL",
+    description: "Panel analógico direccionable de rango medio. Parte de la plataforma unificada serie 7000 que comparte arquitectura con ADR-7000 y GUARD-7.",
+    certification: "EN-54, UL 2900",
     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    category: "panels"
+    category: "panels",
+    price: "Consultar"
   },
   {
-    id: "tpb-800asr",
-    name: "TPB-800ASR",
-    badge: "Avanzado",
+    id: "guard-7",
+    name: "GUARD-7",
+    badge: "Compacto",
     badgeColor: "bg-green-600",
-    description: "Panel de alarma contra incendios con capacidades de comunicación avanzadas y monitoreo remoto.",
-    certification: "Conectividad IoT",
-    image: "https://images.unsplash.com/photo-1562907550-096d3bf9b25c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    category: "panels"
+    description: "Panel compacto que controla hasta 60 dispositivos de entrada/salida. Programación rápida, herramientas de diagnóstico integral, interfaz amigable.",
+    certification: "EN-54, UL 2900",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "panels",
+    price: "Consultar"
   },
   {
-    id: "serie-7000-pro",
-    name: "Serie 7000 Pro",
-    badge: "Premium",
+    id: "tsa-240",
+    name: "TSA-240",
+    badge: "Convencional",
+    badgeColor: "bg-orange-600",
+    description: "Panel de control de alarma contra incendios convencional. Sistema multi-zona mejorado para instalaciones tradicionales.",
+    certification: "EN-54",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "panels",
+    price: "Consultar"
+  },
+  {
+    id: "tsa-200",
+    name: "TSA-200",
+    badge: "Convencional",
     badgeColor: "bg-purple-600",
-    description: "Sistema de control profesional para instalaciones complejas con integración BMS completa.",
-    certification: "Integración BMS",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
-    category: "panels"
+    description: "Sistema convencional multi-zona. Solución confiable para edificios pequeños y medianos con tecnología probada.",
+    certification: "EN-54",
+    image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "panels",
+    price: "Consultar"
+  },
+  {
+    id: "tsa-1000",
+    name: "TSA-1000+",
+    badge: "Convencional Mejorado",
+    badgeColor: "bg-gray-600",
+    description: "Sistema convencional mejorado con capacidades expandidas y funciones avanzadas de diagnóstico.",
+    certification: "EN-54",
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "panels",
+    price: "Consultar"
   }
 ];
 
 const detectors = [
   {
-    id: "tdm-500i",
-    name: "TDM-500i",
-    description: "Detector de humo inteligente con comunicación bidireccional",
-    certification: "Certificado EN-54",
+    id: "tfo-480a",
+    name: "TFO-480A",
+    description: "Detector fotoeléctrico de humo direccionable con alta sensibilidad y comunicación bidireccional",
+    certification: "EN-54, UL",
     image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    category: "detectors"
+    category: "detectors",
+    price: "Consultar"
   },
   {
-    id: "heat-detector",
-    name: "Detector de Calor",
-    description: "Sensor térmico de alta precisión para ambientes especiales",
-    certification: "Rango -40°C a 85°C",
+    id: "tfh-280a",
+    name: "TFH-280A",
+    description: "Detector de calor direccionable con rango de temperatura configurable y respuesta rápida",
+    certification: "EN-54, UL",
     image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
-    category: "detectors"
+    category: "detectors",
+    price: "Consultar"
   },
   {
-    id: "gas-detector",
-    name: "Detector de Gases",
-    description: "Detección multigas para aplicaciones industriales",
-    certification: "Industrial Grade",
-    image: "https://pixabay.com/get/g48436d5f2034834cd291b1ab97b52e0100642d01c737e72d9c19827d40d07cf871b5a1e0d2ae17a039f6a09bd667bac7b65ee32737b3aa3b2bfd67e2af2fc69f_1280.jpg",
-    category: "detectors"
+    id: "tph-482a",
+    name: "TPH-482A",
+    description: "Detector multisensor fotoeléctrico/calor con algoritmos avanzados de procesamiento de señales",
+    certification: "EN-54, UL",
+    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    category: "detectors",
+    price: "Consultar"
   },
   {
-    id: "multi-sensor",
-    name: "Multisensor",
-    description: "Detección combinada de humo, calor y monóxido de carbono",
-    certification: "Triple detección",
-    image: "https://pixabay.com/get/g2c302faedf773add1548086b1f840a56891ca6d86947bd691dd90af06df42fa1013b337a6a00d92ab8f9db8289c014a1e0b4227d2e9af2dc8b168a7664c44647_1280.jpg",
-    category: "detectors"
+    id: "fireray-50r",
+    name: "Fireray® 50R",
+    description: "Sistema de detección lineal de humo con alcance de hasta 50 metros para áreas grandes",
+    certification: "EN-54, UL",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    category: "detectors",
+    price: "Consultar"
+  },
+  {
+    id: "fireray-100r",
+    name: "Fireray® 100R",
+    description: "Sistema de detección lineal de humo de largo alcance hasta 100 metros para instalaciones industriales",
+    certification: "EN-54, UL",
+    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    category: "detectors",
+    price: "Consultar"
+  },
+  {
+    id: "tbd-70",
+    name: "TBD-70",
+    description: "Detector de haz para protección de grandes áreas con tecnología infrarroja",
+    certification: "EN-54",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    category: "detectors",
+    price: "Consultar"
+  },
+  {
+    id: "tsd-4040i",
+    name: "TSD-4040I",
+    description: "Detector de llama infrarrojo para aplicaciones industriales con alta resistencia ambiental",
+    certification: "Industrial",
+    image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    category: "detectors",
+    price: "Consultar"
+  },
+  {
+    id: "lasd-kidde",
+    name: "LASD Kidde",
+    description: "Sistema de detección por aspiración láser para detección temprana en áreas críticas",
+    certification: "EN-54, UL",
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    category: "detectors",
+    price: "Consultar"
   }
 ];
 
 const accessories = [
-  { name: "Sirenas", description: "Notificación audible", icon: Volume2, color: "text-telefire-red" },
-  { name: "Estrobos", description: "Alerta visual", icon: Lightbulb, color: "text-yellow-500" },
-  { name: "Pulsadores", description: "Activación manual", icon: Hand, color: "text-telefire-blue" },
-  { name: "Módulos", description: "Interfaz de control", icon: Plug, color: "text-green-600" },
-  { name: "Aisladores", description: "Protección de línea", icon: ShieldIcon, color: "text-purple-600" },
-  { name: "Bases", description: "Montaje de detectores", icon: Circle, color: "text-gray-600" }
+  { 
+    id: "adr-812a",
+    name: "ADR-812A", 
+    description: "Módulo de entrada para integración de sistemas", 
+    icon: Plug, 
+    color: "text-telefire-blue",
+    price: "Consultar",
+    certification: "Serie 7000"
+  },
+  { 
+    id: "adr-818a",
+    name: "ADR-818A", 
+    description: "Módulo de entrada avanzado", 
+    icon: Plug, 
+    color: "text-green-600",
+    price: "Consultar",
+    certification: "Serie 7000"
+  },
+  { 
+    id: "adr-828a",
+    name: "ADR-828A", 
+    description: "Módulo controlador LED para señalización", 
+    icon: Lightbulb, 
+    color: "text-yellow-500",
+    price: "Consultar",
+    certification: "Serie 7000"
+  },
+  { 
+    id: "tfb-180sba",
+    name: "TFB-180SBA", 
+    description: "Sirena con estrobo integrado", 
+    icon: Volume2, 
+    color: "text-telefire-red",
+    price: "Consultar",
+    certification: "EN-54"
+  },
+  { 
+    id: "tfs-314",
+    name: "TFS-314", 
+    description: "Sirena estándar de alarma", 
+    icon: Volume2, 
+    color: "text-telefire-red",
+    price: "Consultar",
+    certification: "EN-54"
+  },
+  { 
+    id: "tfs-324",
+    name: "TFS-324", 
+    description: "Sirena impermeable para exteriores", 
+    icon: ShieldIcon, 
+    color: "text-purple-600",
+    price: "Consultar",
+    certification: "IP65"
+  },
+  { 
+    id: "rm-7000",
+    name: "RM-7000", 
+    description: "Panel anunciador remoto con LCD", 
+    icon: Circle, 
+    color: "text-gray-600",
+    price: "Consultar",
+    certification: "Serie 7000"
+  },
+  { 
+    id: "net-7000",
+    name: "NET-7000", 
+    description: "Módulo de comunicación TCP/IP", 
+    icon: Wifi, 
+    color: "text-blue-500",
+    price: "Consultar",
+    certification: "Conectividad"
+  }
+];
+
+const extinguishingSystems = [
+  {
+    id: "firepro-tla44",
+    name: "FirePro TLA-44",
+    badge: "Aerosol",
+    badgeColor: "bg-red-600",
+    description: "Adaptador que conecta generadores FirePro a paneles Telefire. Configuraciones para 1-4 conjuntos de aerosol por adaptador.",
+    certification: "Activación múltiple",
+    image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "extinguishing",
+    price: "Consultar"
+  },
+  {
+    id: "firepro-generator",
+    name: "Generador FirePro",
+    badge: "Extinción Limpia",
+    badgeColor: "bg-green-600",
+    description: "Sistema de extinción por aerosol ecológico. Activación eléctrica, térmica o manual para protección total.",
+    certification: "Ecológico",
+    image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "extinguishing",
+    price: "Consultar"
+  }
+];
+
+const cloudServices = [
+  {
+    id: "telefire-connect",
+    name: "Telefire Connect",
+    badge: "Plataforma Cloud",
+    badgeColor: "bg-telefire-blue",
+    description: "Plataforma de monitoreo y gestión basada en la nube con acceso remoto ciberseguro y monitoreo continuo.",
+    certification: "ISO 27001",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "services",
+    price: "Suscripción"
+  },
+  {
+    id: "teleone",
+    name: "TELEONE",
+    badge: "Software",
+    badgeColor: "bg-purple-600",
+    description: "Software de configuración avanzado para paneles Guard-7, Saver-7000 y ADR-7000. Soporta hasta 64 paneles en red.",
+    certification: "Configuración remota",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "services",
+    price: "Licencia"
+  },
+  {
+    id: "backoffice",
+    name: "BackOffice",
+    badge: "Gestión",
+    badgeColor: "bg-orange-600",
+    description: "Aplicación integrada en la nube para gestión administrativa y monitoreo centralizado de instalaciones.",
+    certification: "Gestión centralizada",
+    image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    category: "services",
+    price: "Suscripción"
+  }
 ];
 
 const ibmsSystems = [
@@ -138,11 +343,36 @@ const frontendSystems = [
 
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [cartItems, setCartItems] = useState<string[]>([]);
+
+  const addToCart = (productId: string, productName: string) => {
+    setCartItems(prev => [...prev, productId]);
+    // Scroll to quote form
+    const element = document.querySelector('#socio');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Add product to message if form exists
+      setTimeout(() => {
+        const messageTextarea = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
+        if (messageTextarea) {
+          const currentMessage = messageTextarea.value;
+          const productLine = `\n• ${productName} - Solicitud de cotización`;
+          if (!currentMessage.includes(productName)) {
+            messageTextarea.value = currentMessage + productLine;
+            messageTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+          }
+        }
+      }, 500);
+    }
+  };
 
   const filteredPanels = activeCategory === "all" || activeCategory === "panels" ? controlPanels : [];
   const filteredDetectors = activeCategory === "all" || activeCategory === "detectors" ? detectors : [];
   const filteredIbms = activeCategory === "all" || activeCategory === "ibms" ? ibmsSystems : [];
   const filteredFrontend = activeCategory === "all" || activeCategory === "frontend" ? frontendSystems : [];
+  const filteredExtinguishing = activeCategory === "all" || activeCategory === "extinguishing" ? extinguishingSystems : [];
+  const filteredServices = activeCategory === "all" || activeCategory === "services" ? cloudServices : [];
   const showAccessories = activeCategory === "all" || activeCategory === "accessories";
 
   return (
@@ -171,7 +401,7 @@ export default function Products() {
 
         {/* Product Categories */}
         <div className="mb-12 section-reveal">
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-6">
             {categories.map((category) => (
               <Button
                 key={category.id}
@@ -186,6 +416,25 @@ export default function Products() {
               </Button>
             ))}
           </div>
+          
+          {/* Cart Summary */}
+          {cartItems.length > 0 && (
+            <div className="text-center">
+              <Button 
+                variant="outline"
+                className="bg-telefire-red text-white border-telefire-red hover:bg-red-700"
+                onClick={() => {
+                  const element = document.querySelector('#socio');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+              >
+                <ShoppingCart className="mr-2 h-4 w-4" />
+                Ver Cotización ({cartItems.length} productos)
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Control Panels */}
@@ -220,13 +469,29 @@ export default function Products() {
                       </Badge>
                     </div>
                     <p className="text-gray-600 mb-4">{panel.description}</p>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center text-sm text-gray-500">
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{panel.certification}</span>
                       </div>
-                      <Button variant="ghost" className="text-telefire-blue font-semibold hover:text-telefire-red">
+                      <span className="text-lg font-bold text-telefire-blue">{panel.price}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      >
                         Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-telefire-red hover:bg-red-700"
+                        onClick={() => addToCart(panel.id, panel.name)}
+                        data-testid={`button-quote-${panel.id}`}
+                      >
+                        <Plus className="mr-1 h-4 w-4" />
+                        Cotizar
                       </Button>
                     </div>
                   </CardContent>
@@ -263,13 +528,27 @@ export default function Products() {
                   <CardContent className="p-4">
                     <h4 className="text-lg font-bold text-gray-900 mb-2">{detector.name}</h4>
                     <p className="text-gray-600 text-sm mb-3">{detector.description}</p>
-                    <div className="flex items-center text-xs text-gray-500 mb-3">
-                      <Tag className="mr-1 h-3 w-3 text-green-500" />
-                      <span>{detector.certification}</span>
+                    <div className="flex items-center justify-between text-xs text-gray-500 mb-3">
+                      <div className="flex items-center">
+                        <Tag className="mr-1 h-3 w-3 text-green-500" />
+                        <span>{detector.certification}</span>
+                      </div>
+                      <span className="font-bold text-telefire-blue">{detector.price}</span>
                     </div>
-                    <Button size="sm" className="w-full bg-telefire-blue hover:bg-blue-700">
-                      Ver especificaciones
-                    </Button>
+                    <div className="flex gap-1">
+                      <Button size="sm" variant="outline" className="flex-1 text-xs">
+                        Specs
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-telefire-red hover:bg-red-700 text-xs"
+                        onClick={() => addToCart(detector.id, detector.name)}
+                        data-testid={`button-quote-${detector.id}`}
+                      >
+                        <Plus className="mr-1 h-3 w-3" />
+                        Cotizar
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -309,13 +588,29 @@ export default function Products() {
                       </Badge>
                     </div>
                     <p className="text-gray-600 mb-4">{system.description}</p>
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center text-sm text-gray-500">
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{system.certification}</span>
                       </div>
-                      <Button variant="ghost" className="text-telefire-blue font-semibold hover:text-telefire-red">
+                      <span className="text-lg font-bold text-telefire-blue">{system.price || "Consultar"}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      >
                         Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-telefire-red hover:bg-red-700"
+                        onClick={() => addToCart(system.id, system.name)}
+                        data-testid={`button-quote-${system.id}`}
+                      >
+                        <Plus className="mr-1 h-4 w-4" />
+                        Cotizar
                       </Button>
                     </div>
                   </CardContent>
@@ -373,6 +668,134 @@ export default function Products() {
           </div>
         )}
 
+        {/* Extinguishing Systems */}
+        {filteredExtinguishing.length > 0 && (
+          <div className="mb-16 section-reveal">
+            <div className="flex items-center mb-8">
+              <div className="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4">
+                <ShieldIcon className="text-white h-6 w-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Sistemas de Extinción</h3>
+            </div>
+            <p className="text-gray-600 mb-8">
+              Sistemas de extinción por aerosol ecológicos FirePro con activación múltiple y adaptadores especializados 
+              para integración completa con paneles Telefire.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {filteredExtinguishing.map((system) => (
+                <Card key={system.id} className="group product-card">
+                  <CardHeader className="p-0">
+                    <img 
+                      src={system.image} 
+                      alt={system.name} 
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-xl font-bold text-gray-900">{system.name}</h4>
+                      <Badge className={`${system.badgeColor} text-white`}>
+                        {system.badge}
+                      </Badge>
+                    </div>
+                    <p className="text-gray-600 mb-4">{system.description}</p>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Tag className="mr-2 h-4 w-4" />
+                        <span>{system.certification}</span>
+                      </div>
+                      <span className="text-lg font-bold text-telefire-blue">{system.price}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      >
+                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-telefire-red hover:bg-red-700"
+                        onClick={() => addToCart(system.id, system.name)}
+                        data-testid={`button-quote-${system.id}`}
+                      >
+                        <Plus className="mr-1 h-4 w-4" />
+                        Cotizar
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Cloud Services */}
+        {filteredServices.length > 0 && (
+          <div className="mb-16 section-reveal">
+            <div className="flex items-center mb-8">
+              <div className="w-12 h-12 bg-telefire-blue rounded-lg flex items-center justify-center mr-4">
+                <Wifi className="text-white h-6 w-6" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">Servicios en la Nube</h3>
+            </div>
+            <p className="text-gray-600 mb-8">
+              Plataforma de monitoreo basada en la nube, software de configuración avanzado y aplicaciones 
+              integradas para gestión centralizada y acceso remoto seguro.
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {filteredServices.map((service) => (
+                <Card key={service.id} className="group product-card">
+                  <CardHeader className="p-0">
+                    <img 
+                      src={service.image} 
+                      alt={service.name} 
+                      className="w-full h-48 object-cover rounded-t-lg"
+                    />
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <h4 className="text-xl font-bold text-gray-900">{service.name}</h4>
+                      <Badge className={`${service.badgeColor} text-white`}>
+                        {service.badge}
+                      </Badge>
+                    </div>
+                    <p className="text-gray-600 mb-4">{service.description}</p>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Tag className="mr-2 h-4 w-4" />
+                        <span>{service.certification}</span>
+                      </div>
+                      <span className="text-lg font-bold text-telefire-blue">{service.price}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      >
+                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="flex-1 bg-telefire-red hover:bg-red-700"
+                        onClick={() => addToCart(service.id, service.name)}
+                        data-testid={`button-quote-${service.id}`}
+                      >
+                        <Plus className="mr-1 h-4 w-4" />
+                        Cotizar
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Accessories and Modules */}
         {showAccessories && (
           <div className="section-reveal">
@@ -387,15 +810,28 @@ export default function Products() {
               que se integran perfectamente en los sistemas de alarma contra incendios.
             </p>
             
-            <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {accessories.map((accessory, index) => {
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {accessories.map((accessory) => {
                 const IconComponent = accessory.icon;
                 return (
-                  <Card key={index} className="p-4 text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                    <CardContent className="p-0">
-                      <IconComponent className={`h-8 w-8 mx-auto mb-3 ${accessory.color}`} />
-                      <h5 className="font-semibold text-gray-900 mb-2">{accessory.name}</h5>
-                      <p className="text-xs text-gray-600">{accessory.description}</p>
+                  <Card key={accessory.id} className="group product-card hover:shadow-lg transition-all duration-300">
+                    <CardContent className="p-6 text-center">
+                      <IconComponent className={`h-12 w-12 mx-auto mb-4 ${accessory.color}`} />
+                      <h5 className="font-bold text-gray-900 mb-2">{accessory.name}</h5>
+                      <p className="text-sm text-gray-600 mb-3">{accessory.description}</p>
+                      <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
+                        <span>{accessory.certification}</span>
+                        <span className="font-bold text-telefire-blue">{accessory.price}</span>
+                      </div>
+                      <Button 
+                        size="sm" 
+                        className="w-full bg-telefire-red hover:bg-red-700"
+                        onClick={() => addToCart(accessory.id, accessory.name)}
+                        data-testid={`button-quote-${accessory.id}`}
+                      >
+                        <Plus className="mr-1 h-4 w-4" />
+                        Cotizar
+                      </Button>
                     </CardContent>
                   </Card>
                 );

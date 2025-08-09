@@ -30,8 +30,8 @@ const navItems = [
     label: "Empresa", 
     id: "empresa-menu",
     dropdown: [
-      { href: "#contacto", label: "Acerca de", id: "empresa-contacto" },
-      { href: "#casos-exito", label: "Casos de Éxito", id: "empresa-casos" },
+      { href: "#contacto", label: "Acerca de", id: "empresa-acerca" },
+      { href: "#casos-estudio", label: "Casos de Éxito", id: "empresa-casos" },
       { href: "#sostenibilidad", label: "Sostenibilidad", id: "empresa-sostenibilidad" }
     ]
   },

@@ -123,9 +123,9 @@ export default function Hero() {
             <span className="text-shadow-lg drop-shadow-lg">Y SEGURIDAD</span>
           </h1>
           
-          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-lg bg-white/25 border border-white/40 shadow-2xl">
-            <h2 className="text-2xl font-semibold mb-4">Todo en una sola plataforma IBMS</h2>
-            <p className="text-lg opacity-90">
+          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-lg bg-white/30 border border-white/50 shadow-2xl">
+            <h2 className="text-2xl font-semibold mb-4 text-shadow-lg drop-shadow-lg">Todo en una sola plataforma IBMS</h2>
+            <p className="text-lg opacity-90 text-shadow-lg drop-shadow-md">
               Telefire desarrolla y fabrica soluciones para edificios inteligentes 
               ofreciendo entornos seguros y confortables para un mundo sostenible.
             </p>

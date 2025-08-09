@@ -91,10 +91,11 @@
   }
   
   .glass-effect {
-    backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
+    backdrop-filter: blur(16px) saturate(180%);
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 16px 48px 0 rgba(31, 38, 135, 0.5), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
   
   .section-reveal {
@@ -188,9 +189,10 @@
 
   /* Hamburger menu styling */
   .hamburger-menu {
-    background: white;
+    background: white !important;
     border-left: 1px solid #e5e7eb;
-    z-index: 60;
+    z-index: 60 !important;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
   }
   
   .hamburger-menu .text-telefire-red {
@@ -202,17 +204,25 @@
   }
   
   .hamburger-menu button {
-    transition: all 0.2s ease;
+    transition: all 0.2s ease !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
   }
   
   .hamburger-menu button:hover {
     color: var(--telefire-blue) !important;
-    background-color: rgba(30, 64, 175, 0.1);
-    transform: translateX(4px);
+    background-color: rgba(30, 64, 175, 0.1) !important;
+    transform: translateX(4px) !important;
   }
   
   .hamburger-menu .font-semibold {
     color: #111827 !important;
+  }
+  
+  /* Make sure hamburger trigger is visible and clickable */
+  [data-testid="mobile-menu-trigger"] {
+    z-index: 70 !important;
+    position: relative !important;
   }
 }
 

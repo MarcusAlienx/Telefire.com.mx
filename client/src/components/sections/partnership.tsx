@@ -130,7 +130,7 @@ export default function Partnership() {
 
             <Card className="shadow-2xl">
               <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-900">Contacta con Nosotros</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-900">Contacta con Nosotros y Completa tu Cotización</CardTitle>
               </CardHeader>
               <CardContent>
                 <Form {...form}>

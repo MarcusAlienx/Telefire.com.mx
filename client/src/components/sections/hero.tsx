@@ -123,11 +123,11 @@ export default function Hero() {
             <span className="text-shadow-lg drop-shadow-lg">Y SEGURIDAD</span>
           </h1>
           
-          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-md" style={{
+          <div className="rounded-2xl p-8 mb-8 max-w-2xl mx-auto" style={{
             backdropFilter: 'blur(12px) saturate(150%)',
-            background: 'rgba(255, 255, 255, 0.2)',
-            border: '1px solid rgba(255, 255, 255, 0.25)',
-            boxShadow: '0 12px 32px 0 rgba(31, 38, 135, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4)'
+            background: 'rgba(255, 255, 255, 0.25)',
+            border: '1px solid rgba(255, 255, 255, 0.3)',
+            boxShadow: '0 12px 32px 0 rgba(31, 38, 135, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.5)'
           }}>
             <h2 className="text-2xl font-semibold mb-4 text-shadow-lg drop-shadow-lg">Todo en una sola plataforma IBMS</h2>
             <p className="text-lg opacity-90 text-shadow-lg drop-shadow-md">

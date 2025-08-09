@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Play, ChevronDown, Plus } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { useCartContext } from "@/context/cart-context";
 
 export default function Hero() {
+  const { toast } = useToast();
+  const { addItem } = useCartContext();
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -9,82 +13,23 @@ export default function Hero() {
     }
   };
 
-  const updateCartCounter = () => {
-    const cartCounter = document.querySelector('#cart-counter') as HTMLElement;
-    const cartCount = document.querySelector('#cart-count') as HTMLElement;
-    const quoteItems = document.querySelectorAll('#quote-items li');
-    
-    if (cartCounter && cartCount) {
-      const itemCount = quoteItems.length;
-      cartCount.textContent = itemCount.toString();
-      
-      if (itemCount > 0) {
-        cartCounter.classList.remove('hidden');
-        cartCounter.classList.add('flex');
-      } else {
-        cartCounter.classList.add('hidden');
-        cartCounter.classList.remove('flex');
-      }
-    }
-  };
-
   const addToCart = () => {
-    // Show quote list and add general consultation
-    const quoteList = document.querySelector('#quote-list') as HTMLElement;
-    const quoteItems = document.querySelector('#quote-items') as HTMLElement;
+    // Add general consultation to cart
+    addItem({
+      id: 'general-consultation',
+      name: 'Consultoría General IBMS',
+      category: 'Servicios'
+    });
     
-    if (quoteList && quoteItems) {
-      quoteList.style.display = 'block';
-      
-      // Check if general consultation already exists
-      const existingItem = quoteItems.querySelector(`[data-product-id="general-consultation"]`);
-      if (!existingItem) {
-        const listItem = document.createElement('li');
-        listItem.setAttribute('data-product-id', 'general-consultation');
-        listItem.className = 'flex items-center justify-between bg-white rounded px-3 py-2 border border-green-200';
-        listItem.innerHTML = `
-          <span class="font-medium">Consulta General - Productos y Servicios Telefire</span>
-          <button class="text-red-500 hover:text-red-700 text-sm font-semibold" onclick="this.parentElement.remove(); 
-            if (document.querySelectorAll('#quote-items li').length === 0) { 
-              document.querySelector('#quote-list').style.display = 'none'; 
-            }
-            // Update counter after removal
-            const cartCounter = document.querySelector('#cart-counter');
-            const cartCount = document.querySelector('#cart-count');
-            const remainingItems = document.querySelectorAll('#quote-items li');
-            if (cartCounter && cartCount) {
-              const itemCount = remainingItems.length;
-              cartCount.textContent = itemCount.toString();
-              if (itemCount === 0) {
-                cartCounter.classList.add('hidden');
-                cartCounter.classList.remove('flex');
-              }
-            }">
-            Eliminar
-          </button>
-        `;
-        quoteItems.appendChild(listItem);
-        updateCartCounter();
-      }
-    }
+    toast({
+      title: "¡Producto agregado!",
+      description: "Consultoría General IBMS agregada a la cotización.",
+    });
     
-    // Scroll to quote form
-    const element = document.querySelector('#socio');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Add general consultation to message if form exists
-      setTimeout(() => {
-        const messageTextarea = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
-        if (messageTextarea) {
-          const consultationText = "• Consulta general sobre productos y servicios Telefire - Solicitud de cotización";
-          if (!messageTextarea.value.includes("Consulta general")) {
-            messageTextarea.value = consultationText + "\n" + messageTextarea.value;
-            messageTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-        }
-      }, 500);
-    }
+    // Navigate to partnership section for quotation
+    setTimeout(() => {
+      scrollToSection('#socio');
+    }, 1000);
   };
 
   return (

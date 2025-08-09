@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import CartButton from "@/components/cart/cart-button";
 
 const navItems = [
   { href: "#soluciones", label: "Soluciones", id: "soluciones" },
@@ -151,6 +152,7 @@ export default function Navbar() {
               
               {/* Right side buttons */}
               <div className="flex items-center space-x-3 ml-8">
+                <CartButton />
                 <div id="cart-counter" className="hidden bg-telefire-red text-white rounded-full px-2 py-1 text-xs font-semibold cursor-pointer hover:bg-red-700 transition-colors" 
                      onClick={() => scrollToSection('#socio')}>
                   🛒 <span id="cart-count">0</span>

@@ -14,6 +14,14 @@ export default function CartButton() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setIsOpen(false);
+      
+      // If going to products, show quotation section
+      if (href === '#productos') {
+        setTimeout(() => {
+          // Dispatch event to show quotation in products
+          window.dispatchEvent(new CustomEvent('showQuotation'));
+        }, 500);
+      }
     }
   };
 

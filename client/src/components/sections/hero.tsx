@@ -26,10 +26,8 @@ export default function Hero() {
       description: "Consultoría General IBMS agregada a la cotización.",
     });
     
-    // Navigate to partnership section for quotation
-    setTimeout(() => {
-      scrollToSection('#socio');
-    }, 1000);
+    // Stay in products section - don't navigate away
+    scrollToSection('#productos');
   };
 
   return (

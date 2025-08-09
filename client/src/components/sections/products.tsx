@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Cpu, MapPin, Puzzle, ArrowRight, Tag, Wifi, Activity, Layers, Volume2, Lightbulb, Hand, Plug, Shield as ShieldIcon, Circle, ShoppingCart, Plus } from "lucide-react";
+import { Cpu, MapPin, Puzzle, ArrowRight, Tag, Wifi, Activity, Layers, Volume2, Lightbulb, Hand, Plug, Shield as ShieldIcon, Circle, ShoppingCart, Plus, X } from "lucide-react";
+import { useCartContext } from "@/context/cart-context";
 
 const categories = [
   { id: "all", label: "Todos los productos" },
@@ -348,6 +349,8 @@ const frontendSystems = [
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [cartItems, setCartItems] = useState<string[]>([]);
+  const [showQuotation, setShowQuotation] = useState(false);
+  const { items, addItem, removeItem, totalItems } = useCartContext();
 
   // Listen for category changes from navigation
   useEffect(() => {
@@ -355,9 +358,16 @@ export default function Products() {
       setActiveCategory(event.detail.category);
     };
 
+    const handleShowQuotation = () => {
+      setShowQuotation(true);
+    };
+
     window.addEventListener('setProductCategory', handleCategoryChange as EventListener);
+    window.addEventListener('showQuotation', handleShowQuotation);
+    
     return () => {
       window.removeEventListener('setProductCategory', handleCategoryChange as EventListener);
+      window.removeEventListener('showQuotation', handleShowQuotation);
     };
   }, []);
 
@@ -380,66 +390,16 @@ export default function Products() {
     }
   };
 
-  const addToCart = (productId: string, productName: string) => {
-    setCartItems(prev => [...prev, productId]);
+  const addToCartHandler = (productId: string, productName: string, category: string) => {
+    // Add to cart context
+    addItem({
+      id: productId,
+      name: productName,
+      category: category
+    });
     
-    // Show quote list and add item
-    const quoteList = document.querySelector('#quote-list') as HTMLElement;
-    const quoteItems = document.querySelector('#quote-items') as HTMLElement;
-    
-    if (quoteList && quoteItems) {
-      quoteList.style.display = 'block';
-      
-      // Check if item already exists
-      const existingItem = quoteItems.querySelector(`[data-product-id="${productId}"]`);
-      if (!existingItem) {
-        const listItem = document.createElement('li');
-        listItem.setAttribute('data-product-id', productId);
-        listItem.className = 'flex items-center justify-between bg-white rounded px-3 py-2 border border-green-200';
-        listItem.innerHTML = `
-          <span class="font-medium">${productName}</span>
-          <button class="text-red-500 hover:text-red-700 text-sm font-semibold" onclick="this.parentElement.remove(); 
-            if (document.querySelectorAll('#quote-items li').length === 0) { 
-              document.querySelector('#quote-list').style.display = 'none'; 
-            }
-            // Update counter after removal
-            const cartCounter = document.querySelector('#cart-counter');
-            const cartCount = document.querySelector('#cart-count');
-            const remainingItems = document.querySelectorAll('#quote-items li');
-            if (cartCounter && cartCount) {
-              const itemCount = remainingItems.length;
-              cartCount.textContent = itemCount.toString();
-              if (itemCount === 0) {
-                cartCounter.classList.add('hidden');
-                cartCounter.classList.remove('flex');
-              }
-            }">
-            Eliminar
-          </button>
-        `;
-        quoteItems.appendChild(listItem);
-        updateCartCounter();
-      }
-    }
-    
-    // Scroll to quote form
-    const element = document.querySelector('#socio');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Add product to message if form exists
-      setTimeout(() => {
-        const messageTextarea = document.querySelector('textarea[name="message"]') as HTMLTextAreaElement;
-        if (messageTextarea) {
-          const currentMessage = messageTextarea.value;
-          const productLine = `• ${productName} - Solicitud de cotización`;
-          if (!currentMessage.includes(productName)) {
-            messageTextarea.value = currentMessage + "\n" + productLine;
-            messageTextarea.dispatchEvent(new Event('input', { bubbles: true }));
-          }
-        }
-      }, 500);
-    }
+    // Stay in products section
+    setShowQuotation(true);
   };
 
   const filteredPanels = activeCategory === "all" || activeCategory === "panels" ? controlPanels : [];
@@ -475,6 +435,73 @@ export default function Products() {
             y servicios basados en la nube certificados y probados
           </p>
         </div>
+
+        {/* Quotation Section */}
+        {showQuotation && totalItems > 0 && (
+          <div className="mb-12 section-reveal">
+            <Card className="bg-green-50 border-green-200">
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold text-green-800 flex items-center gap-2">
+                    <ShoppingCart className="h-5 w-5" />
+                    Productos en Cotización ({totalItems})
+                  </h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowQuotation(false)}
+                    className="text-green-600 hover:text-green-800"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 mb-4">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex items-center justify-between p-3 bg-white rounded-lg border">
+                      <div className="flex-1">
+                        <span className="font-medium text-gray-900">{item.name}</span>
+                        <span className="text-sm text-gray-500 ml-2">({item.category})</span>
+                        <span className="ml-2 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                          Qty: {item.quantity}
+                        </span>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeItem(item.id)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex gap-3">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowQuotation(false)}
+                    className="flex-1"
+                  >
+                    Continuar Comprando
+                  </Button>
+                  <Button
+                    className="flex-1 bg-telefire-red hover:bg-red-700"
+                    onClick={() => {
+                      const element = document.querySelector('#socio');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                    }}
+                  >
+                    Solicitar Cotización
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
         {/* Product Categories */}
         <div className="mb-12 section-reveal">
@@ -564,7 +591,7 @@ export default function Products() {
                       <Button 
                         size="sm" 
                         className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCart(panel.id, panel.name)}
+                        onClick={() => addToCartHandler(panel.id, panel.name, panel.category)}
                         data-testid={`button-quote-${panel.id}`}
                       >
                         <Plus className="mr-1 h-4 w-4" />
@@ -619,7 +646,7 @@ export default function Products() {
                       <Button 
                         size="sm" 
                         className="flex-1 bg-telefire-red hover:bg-red-700 text-xs"
-                        onClick={() => addToCart(detector.id, detector.name)}
+                        onClick={() => addToCartHandler(detector.id, detector.name, detector.category)}
                         data-testid={`button-quote-${detector.id}`}
                       >
                         <Plus className="mr-1 h-3 w-3" />
@@ -683,7 +710,7 @@ export default function Products() {
                       <Button 
                         size="sm" 
                         className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCart(system.id, system.name)}
+                        onClick={() => addToCartHandler(system.id, system.name, "ibms")}
                         data-testid={`button-quote-${system.id}`}
                       >
                         <Plus className="mr-1 h-4 w-4" />
@@ -795,7 +822,7 @@ export default function Products() {
                       <Button 
                         size="sm" 
                         className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCart(system.id, system.name)}
+                        onClick={() => addToCartHandler(system.id, system.name, "extinguishing")}
                         data-testid={`button-quote-${system.id}`}
                       >
                         <Plus className="mr-1 h-4 w-4" />
@@ -903,7 +930,7 @@ export default function Products() {
                       <Button 
                         size="sm" 
                         className="w-full bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCart(accessory.id, accessory.name)}
+                        onClick={() => addToCartHandler(accessory.id, accessory.name, "accessories")}
                         data-testid={`button-quote-${accessory.id}`}
                       >
                         <Plus className="mr-1 h-4 w-4" />

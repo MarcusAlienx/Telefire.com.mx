@@ -138,7 +138,7 @@ export default function Footer() {
               </Button>
               <Button 
                 variant="outline" 
-                className="w-full border-telefire-blue text-telefire-blue hover:bg-telefire-blue hover:text-white"
+                className="w-full border-telefire-blue text-[#999999] hover:bg-telefire-blue hover:text-white"
                 onClick={() => scrollToSection('#socio')}
               >
                 Hazte Socio

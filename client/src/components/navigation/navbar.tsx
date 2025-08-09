@@ -182,12 +182,17 @@ export default function Navbar() {
                 <Button 
                   variant="ghost" 
                   size="icon"
-                  className="text-telefire-blue hover:bg-telefire-blue hover:text-white"
+                  className="text-telefire-blue hover:bg-telefire-blue hover:text-white z-50"
+                  data-testid="mobile-menu-trigger"
                 >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent className="w-full sm:w-[400px] hamburger-menu">
+              <SheetContent 
+                className="w-full sm:w-[400px] hamburger-menu bg-white" 
+                side="right"
+                data-testid="mobile-menu-content"
+              >
                 <div className="flex flex-col h-full">
                   {/* Mobile Header */}
                   <div className="flex items-center justify-between pb-6 border-b border-gray-200">

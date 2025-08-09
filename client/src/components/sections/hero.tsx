@@ -148,7 +148,7 @@ export default function Hero() {
             <Button 
               size="lg"
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-telefire-blue bg-white/10 backdrop-blur-sm"
+              className="border-2 border-white text-[#999999] hover:bg-white hover:text-telefire-blue bg-white/10 backdrop-blur-sm"
               onClick={() => scrollToSection('#productos')}
             >
               Ver Productos

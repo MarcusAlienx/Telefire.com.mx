@@ -125,7 +125,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="text-telefire-blue h-5 w-5" />
-                <span className="text-gray-400 text-sm">+52 (55) 1234-5678</span>
+                <span className="text-gray-400 text-sm">+52 (33) 2696-4466</span>
               </div>
             </div>
             

@@ -123,7 +123,7 @@ export default function Hero() {
             <span className="text-shadow-lg drop-shadow-lg">Y SEGURIDAD</span>
           </h1>
           
-          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-md bg-white/20 border border-white/30">
+          <div className="glass-effect rounded-2xl p-8 mb-8 max-w-2xl mx-auto backdrop-blur-lg bg-white/25 border border-white/40 shadow-2xl">
             <h2 className="text-2xl font-semibold mb-4">Todo en una sola plataforma IBMS</h2>
             <p className="text-lg opacity-90">
               Telefire desarrolla y fabrica soluciones para edificios inteligentes 

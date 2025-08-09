@@ -91,10 +91,10 @@
   }
   
   .glass-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.4);
   }
   
   .section-reveal {
@@ -190,18 +190,29 @@
   .hamburger-menu {
     background: white;
     border-left: 1px solid #e5e7eb;
+    z-index: 60;
   }
   
   .hamburger-menu .text-telefire-red {
-    color: var(--telefire-red);
+    color: var(--telefire-red) !important;
   }
   
   .hamburger-menu .text-telefire-blue {
-    color: var(--telefire-blue);
+    color: var(--telefire-blue) !important;
+  }
+  
+  .hamburger-menu button {
+    transition: all 0.2s ease;
   }
   
   .hamburger-menu button:hover {
-    color: var(--telefire-blue);
+    color: var(--telefire-blue) !important;
+    background-color: rgba(30, 64, 175, 0.1);
+    transform: translateX(4px);
+  }
+  
+  .hamburger-menu .font-semibold {
+    color: #111827 !important;
   }
 }
 

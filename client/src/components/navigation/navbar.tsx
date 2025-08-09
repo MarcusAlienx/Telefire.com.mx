@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Menu, ChevronDown, X } from "lucide-react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -193,20 +194,19 @@ export default function Navbar() {
                 side="right"
                 data-testid="mobile-menu-content"
               >
+                <VisuallyHidden>
+                  <SheetTitle>Menú de navegación</SheetTitle>
+                  <SheetDescription>Menú principal de navegación de Telefire México</SheetDescription>
+                </VisuallyHidden>
                 <div className="flex flex-col h-full">
-                  {/* Mobile Header */}
-                  <div className="flex items-center justify-between pb-6 border-b border-gray-200">
+                  {/* Mobile Header - sin botón close duplicado */}
+                  <div className="flex items-center pb-6 border-b border-gray-200">
                     <div className="flex items-center">
                       <div className="w-8 h-8 bg-telefire-red rounded border-2 border-telefire-red mr-2 flex items-center justify-center">
                         <div className="w-3 h-3 bg-white rounded"></div>
                       </div>
                       <span className="text-xl font-bold text-telefire-red">TELEFIRE</span>
                     </div>
-                    <SheetClose asChild>
-                      <Button variant="ghost" size="icon" className="text-gray-500">
-                        <X className="h-5 w-5" />
-                      </Button>
-                    </SheetClose>
                   </div>
                   
                   {/* Mobile Navigation */}

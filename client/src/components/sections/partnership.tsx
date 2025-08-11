@@ -77,9 +77,7 @@ export default function Partnership() {
                   <Handshake className="h-8 w-8 text-white" />
                   <h4 className="text-lg font-semibold text-white">Programa de Socios</h4>
                 </div>
-                <p className="text-blue-100 mb-4">
-                  Descubra valiosas oportunidades dentro de nuestro programa de socios.
-                </p>
+                <p className="text-blue-100 mb-4">Descubra valiosas oportunidades e inigualables descuentos dentro de nuestro programa de socios.</p>
                 <Button 
                   variant="ghost" 
                   className="text-blue-200 hover:text-white hover:bg-white/10 p-0 h-auto"

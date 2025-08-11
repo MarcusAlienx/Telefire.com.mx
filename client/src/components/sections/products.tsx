@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Cpu, MapPin, Puzzle, ArrowRight, Tag, Wifi, Activity, Layers, Volume2, Lightbulb, Hand, Plug, Shield as ShieldIcon, Circle, ShoppingCart, Plus, X } from "lucide-react";
 import { useCartContext } from "@/context/cart-context";
+import { useToast } from "@/hooks/use-toast";
 
 const categories = [
   { id: "all", label: "Todos los productos" },
@@ -351,6 +352,7 @@ export default function Products() {
   const [cartItems, setCartItems] = useState<string[]>([]);
   const [showQuotation, setShowQuotation] = useState(false);
   const { items, addItem, removeItem, totalItems } = useCartContext();
+  const { toast } = useToast();
 
   // Listen for category changes from navigation
   useEffect(() => {
@@ -371,24 +373,7 @@ export default function Products() {
     };
   }, []);
 
-  const updateCartCounter = () => {
-    const cartCounter = document.querySelector('#cart-counter') as HTMLElement;
-    const cartCount = document.querySelector('#cart-count') as HTMLElement;
-    const quoteItems = document.querySelectorAll('#quote-items li');
-    
-    if (cartCounter && cartCount) {
-      const itemCount = quoteItems.length;
-      cartCount.textContent = itemCount.toString();
-      
-      if (itemCount > 0) {
-        cartCounter.classList.remove('hidden');
-        cartCounter.classList.add('flex');
-      } else {
-        cartCounter.classList.add('hidden');
-        cartCounter.classList.remove('flex');
-      }
-    }
-  };
+  // Remove old cart counter logic since we're using React context now
 
   const addToCartHandler = (productId: string, productName: string, category: string) => {
     // Add to cart context
@@ -398,7 +383,13 @@ export default function Products() {
       category: category
     });
     
-    // Stay in products section
+    // Show toast notification
+    toast({
+      title: "¡Producto agregado!",
+      description: `${productName} agregado a la cotización.`,
+    });
+    
+    // Stay in products section and show quotation
     setShowQuotation(true);
   };
 
@@ -521,24 +512,7 @@ export default function Products() {
             ))}
           </div>
           
-          {/* Cart Summary */}
-          {cartItems.length > 0 && (
-            <div className="text-center">
-              <Button 
-                variant="outline"
-                className="bg-telefire-red text-white border-telefire-red hover:bg-red-700"
-                onClick={() => {
-                  const element = document.querySelector('#socio');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
-              >
-                <ShoppingCart className="mr-2 h-4 w-4" />
-                Ver Cotización ({cartItems.length} productos)
-              </Button>
-            </div>
-          )}
+          {/* No need for cart summary here since we show it when clicking cart button */}
         </div>
 
         {/* Control Panels */}

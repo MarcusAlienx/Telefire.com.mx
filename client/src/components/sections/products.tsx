@@ -860,7 +860,7 @@ export default function Products() {
                       <Button 
                         size="sm" 
                         className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCart(service.id, service.name)}
+                        onClick={() => addToCartHandler(service.id, service.name, "services")}
                         data-testid={`button-quote-${service.id}`}
                       >
                         <Plus className="mr-1 h-4 w-4" />

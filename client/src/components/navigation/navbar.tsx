@@ -174,8 +174,9 @@ export default function Navbar() {
           
 
           
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
+          {/* Mobile menu button and cart */}
+          <div className="lg:hidden flex items-center space-x-2">
+            <CartButton />
             <Sheet>
               <SheetTrigger asChild>
                 <Button 

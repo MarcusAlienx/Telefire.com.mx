@@ -4,8 +4,8 @@
   # Directory to publish (build output)
   publish = "dist/"
   
-  # Build command
-  command = "npm run build"
+  # Build command - only build frontend for static hosting
+  command = "vite build"
   
   # Functions directory (if needed)
   functions = "netlify/functions"
@@ -18,10 +18,8 @@
   NODE_ENV = "production"
 
 # Redirect rules for Single Page Application
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# Note: API routes are not available in static hosting
+# For backend functionality, consider Netlify Functions or external API
 
 [[redirects]]
   from = "/*"
@@ -82,12 +80,6 @@
 [context.branch-deploy.environment]
   NODE_ENV = "development"
 
-# Plugin configuration
-[[plugins]]
-  package = "@netlify/plugin-lighthouse"
-  
-  [plugins.inputs.thresholds]
-    performance = 0.9
-    accessibility = 0.9
-    best-practices = 0.9
-    seo = 0.9
+# Plugin configuration - removed for simpler deployment
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"

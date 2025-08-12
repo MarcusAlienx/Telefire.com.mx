@@ -1,0 +1,86 @@
+The Netlify deploy errored, with the following guidance provided:
+
+**Diagnosis:**
+The build failure is occurring because the command `vite` is not found when running the build script.
+
+**Solution:**
+1. Since `vite` is not found, you need to ensure that Vite is installed or listed as a dependency in your project.
+2. Check if Vite is listed in your project's `package.json` file. If it's missing, you need to add it as a dependency by running:
+   ```bash
+   npm install vite --save-dev
+   ```
+3. After adding Vite as a dependency, make sure to commit the changes to your repository.
+4. Retry the build on Netlify to verify if the issue is resolved.
+
+The relevant error logs are:
+
+Line 0: build-image version: 71a98eb82b055b934e7d58946f59957e90f5a76f (noble)
+Line 1: buildbot version: 72ba091da8478e084b7407a21cd8435e7ecab808
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/conexionglocal/TelefireMexicoX
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Starting to install dependencies
+Line 9: Downloading and installing node v18.20.8...
+Line 10: Downloading https://nodejs.org/dist/v18.20.8/node-v18.20.8-linux-x64.tar.xz...
+Line 11: Computing checksum with sha256sum
+Line 12: Checksums matched!
+Line 13: Now using node v18.20.8 (npm v10.8.2)
+Line 45:   /opt/build/repo
+Line 46: [36m[1m​[22m[39m
+Line 47: [36m[1m❯ Config file[22m[39m
+Line 48:   /opt/build/repo/netlify.toml
+Line 49: [36m[1m​[22m[39m
+Line 50: [36m[1m❯ Context[22m[39m
+Line 51:   production
+Line 52: [36m[1m​[22m[39m
+Line 53: [36m[1m❯ Installing plugins[22m[39m
+Line 54:    - @netlify/plugin-lighthouse@6.0.1
+Line 55: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 56: [36m[1m​[22m[39m
+Line 57: [36m[1m❯ Loading plugins[22m[39m
+Line 58:    - [36m@netlify/plugin-lighthouse[39m@6.0.1 from netlify.toml
+Line 59: [96m[1m​[22m[39m
+Line 60: [96m[1mbuild.command from netlify.toml                               [22m[39m
+Line 61: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 62: ​
+Line 63: [36m$ npm run build[39m
+Line 64: > rest-express@1.0.0 build
+Line 65: > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+Line 66: sh: 1: vite: not found
+Line 67: [91m[1m​[22m[39m
+Line 68: [91m[1m"build.command" failed                                        [22m[39m
+Line 69: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 70: ​
+Line 71:   [31m[1mError message[22m[39m
+Line 72:   Command failed with exit code 127: npm run build
+Line 73: ​
+Line 74:   [31m[1mError location[22m[39m
+Line 75:   In build.command from netlify.toml:
+Line 76:   npm run build
+Line 77: ​
+Line 78:   [31m[1mResolved config[22m[39m
+Line 79:   build:
+Line 80:     command: npm run build
+Line 81:     commandOrigin: config
+Line 82:     environment:
+Line 83:       - NODE_VERSION
+Line 84:       - NODE_ENV
+Line 91:         pretty_urls: true
+Line 92:       js:
+Line 93:         bundle: true
+Line 94:         minify: true
+Line 95:       skip_processing: false
+Line 96:     publish: /opt/build/repo/dist
+Line 97:     publishOrigin: config
+Line 98:   functionsDirectory: /opt/build/repo/netlify/functions
+Line 99:   headers:
+Line 100:     - for: /*
+      values:
+        Cache-Control: public, max-age=31536000, immutable
+        Referrer-Policy: strict-origin-wh
+Line 101: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 102: Failing build: Failed to build site
+Line 103: Finished processing build request in 26.285s

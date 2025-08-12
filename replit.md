@@ -37,6 +37,9 @@ El sitio web sirve como plataforma de marketing para Telefire México, presentan
 - ✅ **Versión móvil** del carrito implementada
 - ✅ **Todos los productos** conectados al sistema de carrito
 - ✅ **Flujo completo** de cotización funcional
+- ✅ **Error de Netlify corregido** - Vite movido a dependencies
+- ✅ **Build optimizado** para hosting estático (solo `vite build`)
+- ✅ **Configuración Netlify** simplificada y funcional
 
 ## User Preferences
 

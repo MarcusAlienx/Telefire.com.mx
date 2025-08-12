@@ -31,9 +31,11 @@ proyecto/
 2. Click en "New site from Git"
 3. Autorizar GitHub y seleccionar repositorio
 4. Configurar build settings:
-   - **Build command**: `npm run build`
+   - **Build command**: `vite build`
    - **Publish directory**: `dist`
    - **Node version**: `18`
+
+> **Nota Importante**: El proyecto ahora está configurado como sitio estático. Los formularios de contacto necesitarán Netlify Forms o EmailJS para funcionar.
 
 #### Paso 2: Variables de Entorno
 En Netlify Dashboard → Site settings → Environment variables:

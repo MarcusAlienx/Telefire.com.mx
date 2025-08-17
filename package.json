@@ -103,7 +103,8 @@
 
     "typescript": "5.6.3"
   },
-  "optionalDependencies": {
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
     "bufferutil": "^4.0.8"
   }
 }

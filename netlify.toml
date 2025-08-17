@@ -5,14 +5,14 @@
   publish = "dist/public/"
   
   # Build command - only build frontend for static hosting
-  command = "vite build"
+  command = "npm run build"
   
   # Functions directory (if needed)
   functions = "netlify/functions"
 
 [build.environment]
   # Node.js version
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"
   
   # Production environment
   NODE_ENV = "production"

@@ -1,95 +1,82 @@
 The Netlify deploy errored, with the following guidance provided:
 
-**Diagnosis:**
-The build failure is due to the command `vite build` not being found, resulting in "Command failed with exit code 127" error.
+### Diagnosis
+[line 61](#L61): The build failed because the command `vite build` could not be found.
 
-**Solution:**
-1. The error indicates that the build command is trying to run `vite build` but is unable to locate the `vite` command.
-2. To resolve this issue, `vite` needs to be installed as a dependency in your project.
-3. Make sure that `vite` is listed as a dependency in your `package.json` file. If it's not there, you need to add it by running:
-   ```bash
-   npm install vite --save-dev
-   ```
-4. Once `vite` is added to your project dependencies, commit the `package.json` file to the repository.
-5. After that, trigger a new build on Netlify to ensure the changes take effect.
+### Solution
+The error `bash: line 1: vite: command not found` indicates that the `vite` command is not available during the build process. To resolve this issue, you need to ensure that the `vite` command is accessible in the build environment.
+
+1. Verify that the `vite` package is listed as a dependency in the `package.json` file of the project.
+2. If `vite` is a development dependency, make sure the package is not mistakenly listed under `devDependencies`.
+3. If `vite` is a dependency, ensure it is included in the `node_modules` directory by committing the `package-lock.json` or `yarn.lock` file to the repository.
+4. If `vite` is a global package required for the build, you may need to install it globally in the build settings or include it as a dependency in the project.
+5. To fix the command not found issue, you might need to adjust the build command to include the path to the `vite` binary. Alternatively, you could install `vite` locally before running the build command.
+
+After addressing these points, you should be able to run the build successfully.
 
 The relevant error logs are:
 
-Line 0: build-image version: e5074bde24e53715f94c72a3902b7868fbfe84e1 (noble)
-Line 1: buildbot version: e2595138a7c5ab9f292ccfa2932733582fe0dc65
-Line 2: Fetching cached dependencies
-Line 3: Failed to fetch cache, continuing with build
-Line 4: Starting to prepare the repo for build
-Line 5: No cached dependencies found. Cloning fresh repo
-Line 6: git clone --filter=blob:none https://github.com/MarcusAlienx/Telefire.com.mx
-Line 7: Preparing Git Reference refs/heads/main
-Line 8: Starting to install dependencies
-Line 9: Downloading and installing node v18.20.8...
-Line 10: Downloading https://nodejs.org/dist/v18.20.8/node-v18.20.8-linux-x64.tar.xz...
-Line 11: Computing checksum with sha256sum
-Line 12: Checksums matched!
-Line 13: Now using node v18.20.8 (npm v10.8.2)
-Line 27: npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
-Line 28: npm warn EBADENGINE }
-Line 29: added 2 packages in 784ms
+Line 18: Finished restoring cached corepack dependencies
+Line 19: No npm workspaces detected
+Line 20: Started restoring cached node modules
+Line 21: Finished restoring cached node modules
+Line 22: Installing npm packages using npm version 10.8.2
+Line 23: npm warn EBADENGINE Unsupported engine {
+Line 24: npm warn EBADENGINE   package: 'cross-env@10.0.0',
+Line 25: npm warn EBADENGINE   required: { node: '>=20' },
+Line 26: npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+Line 27: npm warn EBADENGINE }
+Line 28: Failed during stage 'building site': Build script returned non-zero exit code: 2
+Line 29: added 372 packages in 8s
 Line 30: npm packages installed
 Line 31: Successfully installed dependencies
 Line 32: Starting build script
-Line 33: Detected 2 framework(s)
-Line 34: "hydrogen" at version "unknown"
-Line 35: "remix" at version "unknown"
-Line 36: Section completed: initializing
-Line 37: Failed during stage 'building site': Build script returned non-zero exit code: 2
-Line 38: [96m[1m​[22m[39m
-Line 39: [96m[1mNetlify Build                                                 [22m[39m
-Line 40: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
-Line 41: [36m[1m​[22m[39m
-Line 42: [36m[1m❯ Version[22m[39m
-Line 43:   @netlify/build 35.1.0
-Line 44: [36m[1m​[22m[39m
-Line 45: [36m[1m❯ Flags[22m[39m
-Line 46:   accountId: "67e769835052057438881041"
-Line 47:   baseRelDir: true
-Line 56: [36m[1m​[22m[39m
-Line 57: [36m[1m❯ Context[22m[39m
-Line 58:   production
-Line 59: [96m[1m​[22m[39m
-Line 60: [96m[1mbuild.command from netlify.toml                               [22m[39m
-Line 61: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
-Line 62: ​
-Line 63: [36m$ vite build[39m
-Line 64: bash: line 1: vite: command not found
-Line 65: [91m[1m​[22m[39m
-Line 66: [91m[1m"build.command" failed                                        [22m[39m
-Line 67: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
-Line 68: ​
-Line 69:   [31m[1mError message[22m[39m
-Line 70:   Command failed with exit code 127: vite build
-Line 71: ​
-Line 72:   [31m[1mError location[22m[39m
-Line 73:   In build.command from netlify.toml:
-Line 74:   vite build
-Line 75: ​
-Line 76:   [31m[1mResolved config[22m[39m
-Line 77:   build:
-Line 78:     command: vite build
-Line 79:     commandOrigin: config
-Line 80:     environment:
-Line 81:       - NODE_VERSION
-Line 82:       - NODE_ENV
-Line 89:         pretty_urls: true
-Line 90:       js:
-Line 91:         bundle: true
-Line 92:         minify: true
-Line 93:       skip_processing: false
-Line 94:     publish: /opt/build/repo/dist/public
-Line 95:     publishOrigin: config
-Line 96:   functionsDirectory: /opt/build/repo/netlify/functions
-Line 97:   headers:
-Line 98:     - for: /*
+Line 33: Detected 1 framework(s)
+Line 34: "vite" at version "5.4.19"
+Line 35: Section completed: initializing
+Line 36: [96m[1m​[22m[39m
+Line 37: [96m[1mNetlify Build                                                 [22m[39m
+Line 38: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 54: [36m[1m​[22m[39m
+Line 55: [36m[1m❯ Context[22m[39m
+Line 56:   production
+Line 57: [96m[1m​[22m[39m
+Line 58: [96m[1mbuild.command from netlify.toml                               [22m[39m
+Line 59: [96m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 60: ​
+Line 61: [36m$ vite build[39m
+Line 62: bash: line 1: vite: command not found
+Line 63: [91m[1m​[22m[39m
+Line 64: [91m[1m"build.command" failed                                        [22m[39m
+Line 65: [91m[1m────────────────────────────────────────────────────────────────[22m[39m
+Line 66: ​
+Line 67:   [31m[1mError message[22m[39m
+Line 68:   Command failed with exit code 127: vite build
+Line 69: ​
+Line 70:   [31m[1mError location[22m[39m
+Line 71:   In build.command from netlify.toml:
+Line 72:   vite build
+Line 73: ​
+Line 74:   [31m[1mResolved config[22m[39m
+Line 75:   build:
+Line 76:     command: vite build
+Line 77:     commandOrigin: config
+Line 78:     environment:
+Line 79:       - NODE_VERSION
+Line 80:       - NODE_ENV
+Line 87:         pretty_urls: true
+Line 88:       js:
+Line 89:         bundle: true
+Line 90:         minify: true
+Line 91:       skip_processing: false
+Line 92:     publish: /opt/build/repo/dist/public
+Line 93:     publishOrigin: config
+Line 94:   functionsDirectory: /opt/build/repo/netlify/functions
+Line 95:   headers:
+Line 96:     - for: /*
       values:
         Cache-Control: public, max-age=31536000, immutable
         Referrer-Policy: strict-origin-wh
-Line 99: Build failed due to a user error: Build script returned non-zero exit code: 2
-Line 100: Failing build: Failed to build site
-Line 101: Finished processing build request in 12.771s
+Line 97: Build failed due to a user error: Build script returned non-zero exit code: 2
+Line 98: Failing build: Failed to build site
+Line 99: Finished processing build request in 17.66s

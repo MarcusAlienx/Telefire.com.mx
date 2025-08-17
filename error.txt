@@ -1,0 +1,43 @@
+The Netlify deploy errored, with the following guidance provided:
+
+**Diagnosis:**
+The build failed due to an unsupported engine version for the 'cross-env' package. The package 'cross-env@10.0.0' requires Node version '>=20', but the current Node version is 'v18.20.8'.
+
+**Solution:**
+1. **Verify Package or File:**
+   Ensure that the 'cross-env@10.0.0' package is listed in the `package.json` file or was committed to the repository.
+
+2. **Update Node Version:**
+   As the 'cross-env' package requires Node version '>=20', you need to update the Node version in your build environment.
+   
+   - Update the Node version in your project to a version that is compatible with 'cross-env@10.0.0'.
+   
+   - If Node version management is needed in your project, refer to the [documentation](https://docs.netlify.com/configure-builds/manage-dependencies/#node-js-and-javascript) for changing Node versions.
+
+The relevant error logs are:
+
+Line 0: build-image version: e5074bde24e53715f94c72a3902b7868fbfe84e1 (noble)
+Line 1: buildbot version: e2595138a7c5ab9f292ccfa2932733582fe0dc65
+Line 2: Fetching cached dependencies
+Line 3: Failed to fetch cache, continuing with build
+Line 4: Starting to prepare the repo for build
+Line 5: No cached dependencies found. Cloning fresh repo
+Line 6: git clone --filter=blob:none https://github.com/MarcusAlienx/Telefire.com.mx
+Line 7: Preparing Git Reference refs/heads/main
+Line 8: Starting to install dependencies
+Line 9: Downloading and installing node v18.20.8...
+Line 10: Downloading https://nodejs.org/dist/v18.20.8/node-v18.20.8-linux-x64.tar.xz...
+Line 11: Computing checksum with sha256sum
+Line 12: Checksums matched!
+Line 13: Now using node v18.20.8 (npm v10.8.2)
+Line 19: Finished restoring cached corepack dependencies
+Line 20: No npm workspaces detected
+Line 21: Started restoring cached node modules
+Line 22: Finished restoring cached node modules
+Line 23: Installing npm packages using npm version 10.8.2
+Line 24: npm warn EBADENGINE Unsupported engine {
+Line 25: npm warn EBADENGINE   package: 'cross-env@10.0.0',
+Line 26: npm warn EBADENGINE   required: { node: '>=20' },
+Line 27: npm warn EBADENGINE   current: { node: 'v18.20.8', npm: '10.8.2' }
+Line 28: npm warn EBADENGINE }
+Line 29: Failed during stage 'building site': Build script returned non-zero exit code: 2

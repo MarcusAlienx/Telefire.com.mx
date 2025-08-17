@@ -2,7 +2,7 @@
 
 [build]
   # Directory to publish (build output)
-  publish = "dist/public/"
+  publish = "dist/"
   
   # Build command - only build frontend for static hosting
   command = "vite build"

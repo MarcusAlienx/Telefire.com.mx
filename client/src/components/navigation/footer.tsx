@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Linkedin, Youtube, Twitter, MapPin, Mail, Phone } from "lucide-react";
+import telefireLogo from "@assets/assets/telefire-logo.svg";
 
 const solutions = [
   { name: "IBMS", href: "#soluciones" },
@@ -37,8 +38,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center mb-6">
-              <div className="w-8 h-8 bg-telefire-red rounded border-2 border-telefire-red mr-2"></div>
-              <span className="text-2xl font-bold text-telefire-red">TELEFIRE</span>
+              <img src={telefireLogo} alt="Telefire Logo" className="h-10" />
             </div>
             <p className="text-gray-400 mb-6">
               Líder en sistemas inteligentes de gestión de edificios, protección contra incendios y seguridad para un mundo sostenible.

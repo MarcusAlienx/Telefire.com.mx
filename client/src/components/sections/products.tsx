@@ -1,10 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FC } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Cpu, MapPin, Puzzle, ArrowRight, Tag, Wifi, Activity, Layers, Volume2, Lightbulb, Hand, Plug, Shield as ShieldIcon, Circle, ShoppingCart, Plus, X } from "lucide-react";
 import { useCartContext } from "@/context/cart-context";
 import { useToast } from "@/hooks/use-toast";
+import ProductDetailCard from "./product-detail-card";
+
+import adr7000Image from "@assets/assets/ADR-7000-scaled.jpg.webp";
+import saver7000Image from "@assets/assets/SAVER-640x427.jpg";
+import tfo480aImage from "@assets/assets/TFO-480A-1.jpg.webp";
+import tph482aImage from "@assets/assets/TPH-482A.jpg";
+import rm7000Image from "@assets/assets/RM-7000-new-logo.jpg.webp";
+import teleoneImage from "@assets/assets/teleone1-on-screen.jpg";
+import backofficeImage from "@assets/assets/backoffice1-on-screen.jpg";
+import sniperImage from "@assets/assets/sniper-interface1.jpg";
+import ibmsImage from "@assets/assets/IBMS_02.jpg";
+import alertoImage from "@assets/assets/ALERTO_mobile_end-users1.jpg";
+import telefireConnectImage from "@assets/assets/teleone1-on-screen.jpg";
+import guard7Image from "@assets/assets/GUARD-7.jpg";
+import fireray100rImage from "@assets/assets/FireRay-100R.jpeg";
+import fireproTla44Image from "@assets/assets/TLA-44.jpeg";
+import fireproGeneratorImage from "@assets/assets/Generador_FIRE-PRO.webp";
+
+// Generic product type
+interface Product {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  certification?: string;
+  image?: string;
+  badge?: string;
+  badgeColor?: string;
+  price?: string;
+  icon?: FC<any>;
+  color?: string;
+}
 
 const categories = [
   { id: "all", label: "Todos los productos" },
@@ -17,7 +49,7 @@ const categories = [
   { id: "services", label: "Servicios en la Nube" }
 ];
 
-const controlPanels = [
+const controlPanels: Product[] = [
   {
     id: "adr-7000",
     name: "ADR-7000",
@@ -25,7 +57,7 @@ const controlPanels = [
     badgeColor: "bg-telefire-red",
     description: "Panel avanzado hasta 8 bucles, controla hasta 1,016 dispositivos inteligentes por unidad. Red de hasta 32 paneles. Fuente de 150W expandible.",
     certification: "UL 864, EN-54, UL-2900",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: adr7000Image,
     category: "panels",
     price: "Consultar"
   },
@@ -36,7 +68,7 @@ const controlPanels = [
     badgeColor: "bg-telefire-blue",
     description: "Panel analógico direccionable de rango medio. Parte de la plataforma unificada serie 7000 que comparte arquitectura con ADR-7000 y GUARD-7.",
     certification: "EN-54, UL 2900",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: saver7000Image,
     category: "panels",
     price: "Consultar"
   },
@@ -47,7 +79,7 @@ const controlPanels = [
     badgeColor: "bg-green-600",
     description: "Panel compacto que controla hasta 60 dispositivos de entrada/salida. Programación rápida, herramientas de diagnóstico integral, interfaz amigable.",
     certification: "EN-54, UL 2900",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: guard7Image,
     category: "panels",
     price: "Consultar"
   },
@@ -86,13 +118,13 @@ const controlPanels = [
   }
 ];
 
-const detectors = [
+const detectors: Product[] = [
   {
     id: "tfo-480a",
     name: "TFO-480A",
     description: "Detector fotoeléctrico de humo direccionable con alta sensibilidad y comunicación bidireccional",
     certification: "EN-54, UL",
-    image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    image: tfo480aImage,
     category: "detectors",
     price: "Consultar"
   },
@@ -110,7 +142,7 @@ const detectors = [
     name: "TPH-482A",
     description: "Detector multisensor fotoeléctrico/calor con algoritmos avanzados de procesamiento de señales",
     certification: "EN-54, UL",
-    image: "https://images.unsplash.com/photo-1590736969955-71cc94901144?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    image: tph482aImage,
     category: "detectors",
     price: "Consultar"
   },
@@ -128,7 +160,7 @@ const detectors = [
     name: "Fireray® 100R",
     description: "Sistema de detección lineal de humo de largo alcance hasta 100 metros para instalaciones industriales",
     certification: "EN-54, UL",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300",
+    image: fireray100rImage,
     category: "detectors",
     price: "Consultar"
   },
@@ -161,7 +193,7 @@ const detectors = [
   }
 ];
 
-const accessories = [
+const accessories: Product[] = [
   { 
     id: "adr-812a",
     name: "ADR-812A", 
@@ -169,7 +201,8 @@ const accessories = [
     icon: Plug, 
     color: "text-telefire-blue",
     price: "Consultar",
-    certification: "Serie 7000"
+    certification: "Serie 7000",
+    category: "accessories"
   },
   { 
     id: "adr-818a",
@@ -178,7 +211,8 @@ const accessories = [
     icon: Plug, 
     color: "text-green-600",
     price: "Consultar",
-    certification: "Serie 7000"
+    certification: "Serie 7000",
+    category: "accessories"
   },
   { 
     id: "adr-828a",
@@ -187,7 +221,8 @@ const accessories = [
     icon: Lightbulb, 
     color: "text-yellow-500",
     price: "Consultar",
-    certification: "Serie 7000"
+    certification: "Serie 7000",
+    category: "accessories"
   },
   { 
     id: "tfb-180sba",
@@ -196,7 +231,8 @@ const accessories = [
     icon: Volume2, 
     color: "text-telefire-red",
     price: "Consultar",
-    certification: "EN-54"
+    certification: "EN-54",
+    category: "accessories"
   },
   { 
     id: "tfs-314",
@@ -205,7 +241,8 @@ const accessories = [
     icon: Volume2, 
     color: "text-telefire-red",
     price: "Consultar",
-    certification: "EN-54"
+    certification: "EN-54",
+    category: "accessories"
   },
   { 
     id: "tfs-324",
@@ -214,7 +251,8 @@ const accessories = [
     icon: ShieldIcon, 
     color: "text-purple-600",
     price: "Consultar",
-    certification: "IP65"
+    certification: "IP65",
+    category: "accessories"
   },
   { 
     id: "rm-7000",
@@ -223,7 +261,9 @@ const accessories = [
     icon: Circle, 
     color: "text-gray-600",
     price: "Consultar",
-    certification: "Serie 7000"
+    certification: "Serie 7000",
+    image: rm7000Image,
+    category: "accessories"
   },
   { 
     id: "net-7000",
@@ -232,11 +272,12 @@ const accessories = [
     icon: Wifi, 
     color: "text-blue-500",
     price: "Consultar",
-    certification: "Conectividad"
+    certification: "Conectividad",
+    category: "accessories"
   }
 ];
 
-const extinguishingSystems = [
+const extinguishingSystems: Product[] = [
   {
     id: "firepro-tla44",
     name: "FirePro TLA-44",
@@ -244,7 +285,7 @@ const extinguishingSystems = [
     badgeColor: "bg-red-600",
     description: "Adaptador que conecta generadores FirePro a paneles Telefire. Configuraciones para 1-4 conjuntos de aerosol por adaptador.",
     certification: "Activación múltiple",
-    image: "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: fireproTla44Image,
     category: "extinguishing",
     price: "Consultar"
   },
@@ -255,13 +296,13 @@ const extinguishingSystems = [
     badgeColor: "bg-green-600",
     description: "Sistema de extinción por aerosol ecológico. Activación eléctrica, térmica o manual para protección total.",
     certification: "Ecológico",
-    image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: fireproGeneratorImage,
     category: "extinguishing",
     price: "Consultar"
   }
 ];
 
-const cloudServices = [
+const cloudServices: Product[] = [
   {
     id: "telefire-connect",
     name: "Telefire Connect",
@@ -269,7 +310,7 @@ const cloudServices = [
     badgeColor: "bg-telefire-blue",
     description: "Plataforma de monitoreo y gestión basada en la nube con acceso remoto ciberseguro y monitoreo continuo.",
     certification: "ISO 27001",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: telefireConnectImage,
     category: "services",
     price: "Suscripción"
   },
@@ -280,7 +321,7 @@ const cloudServices = [
     badgeColor: "bg-purple-600",
     description: "Software de configuración avanzado para paneles Guard-7, Saver-7000 y ADR-7000. Soporta hasta 64 paneles en red.",
     certification: "Configuración remota",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: teleoneImage,
     category: "services",
     price: "Licencia"
   },
@@ -291,13 +332,13 @@ const cloudServices = [
     badgeColor: "bg-orange-600",
     description: "Aplicación integrada en la nube para gestión administrativa y monitoreo centralizado de instalaciones.",
     certification: "Gestión centralizada",
-    image: "https://images.unsplash.com/photo-1551818255-e6e10975bc17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: backofficeImage,
     category: "services",
     price: "Suscripción"
   }
 ];
 
-const ibmsSystems = [
+const ibmsSystems: Product[] = [
   {
     id: "sniper",
     name: "SNIPER",
@@ -306,7 +347,7 @@ const ibmsSystems = [
     description: "Sistema integrado de gestión de edificios que combina seguridad y eficiencia operacional con capacidades de vanguardia.",
     certification: "Gestión Unificada",
     price: "Consultar",
-    image: "https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: sniperImage,
     category: "ibms"
   },
   {
@@ -316,13 +357,13 @@ const ibmsSystems = [
     badgeColor: "bg-telefire-blue",
     description: "Plataforma abierta para integración con controladores de terceros, proporcionando una vista unificada.",
     certification: "API Abierta",
-    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: ibmsImage,
     category: "ibms",
     price: "Consultar"
   }
 ];
 
-const frontendSystems = [
+const frontendSystems: Product[] = [
   {
     id: "alerto-plus",
     name: "Alerto+",
@@ -330,7 +371,7 @@ const frontendSystems = [
     badgeColor: "bg-green-600",
     description: "Solución orientada al usuario final para mejorar la accesibilidad en detección y control de incendios.",
     certification: "Interfaz Intuitiva",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&h=400",
+    image: alertoImage,
     category: "frontend",
     price: "Consultar"
   },
@@ -349,48 +390,42 @@ const frontendSystems = [
 
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [cartItems, setCartItems] = useState<string[]>([]);
-  const [showQuotation, setShowQuotation] = useState(false);
   const { items, addItem, removeItem, totalItems } = useCartContext();
   const { toast } = useToast();
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  // Listen for category changes from navigation
+  const handleDetailsClick = (product: Product) => {
+    setSelectedProduct(product);
+  };
+
+  const closeDetailView = () => {
+    setSelectedProduct(null);
+  };
+
   useEffect(() => {
     const handleCategoryChange = (event: CustomEvent) => {
       setActiveCategory(event.detail.category);
     };
 
-    const handleShowQuotation = () => {
-      setShowQuotation(true);
-    };
-
     window.addEventListener('setProductCategory', handleCategoryChange as EventListener);
-    window.addEventListener('showQuotation', handleShowQuotation);
     
     return () => {
       window.removeEventListener('setProductCategory', handleCategoryChange as EventListener);
-      window.removeEventListener('showQuotation', handleShowQuotation);
     };
   }, []);
 
-  // Remove old cart counter logic since we're using React context now
-
-  const addToCartHandler = (productId: string, productName: string, category: string) => {
-    // Add to cart context
+  const addToCartHandler = (product: Product) => {
     addItem({
-      id: productId,
-      name: productName,
-      category: category
+      id: product.id,
+      name: product.name,
+      category: product.category,
+      quantity: 1
     });
     
-    // Show toast notification
     toast({
       title: "¡Producto agregado!",
-      description: `${productName} agregado a la cotización.`,
+      description: `${product.name} agregado a la cotización.`,
     });
-    
-    // Stay in products section and show quotation
-    setShowQuotation(true);
   };
 
   const filteredPanels = activeCategory === "all" || activeCategory === "panels" ? controlPanels : [];
@@ -401,21 +436,13 @@ export default function Products() {
   const filteredServices = activeCategory === "all" || activeCategory === "services" ? cloudServices : [];
   const showAccessories = activeCategory === "all" || activeCategory === "accessories";
 
-
-
   return (
     <section id="productos" className="py-20 bg-gray-50 relative min-h-screen">
-      {/* Decorative side elements */}
-      <div className="absolute left-4 top-1/4 opacity-10">
-        <svg width="40" height="100" viewBox="0 0 40 100" className="text-telefire-blue">
-          <path d="M0,0 L40,50 L0,100" fill="none" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      </div>
-      <div className="absolute right-4 top-1/3 opacity-10">
-        <svg width="40" height="80" viewBox="0 0 40 80" className="text-telefire-blue">
-          <path d="M40,0 L0,40 L40,80" fill="none" stroke="currentColor" strokeWidth="2"/>
-        </svg>
-      </div>
+      <ProductDetailCard 
+        product={selectedProduct}
+        isOpen={selectedProduct !== null}
+        onClose={closeDetailView}
+      />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 section-reveal">
@@ -426,73 +453,6 @@ export default function Products() {
             y servicios basados en la nube certificados y probados
           </p>
         </div>
-
-        {/* Quotation Section */}
-        {showQuotation && totalItems > 0 && (
-          <div className="mb-12 section-reveal">
-            <Card className="bg-green-50 border-green-200">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-green-800 flex items-center gap-2">
-                    <ShoppingCart className="h-5 w-5" />
-                    Productos en Cotización ({totalItems})
-                  </h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowQuotation(false)}
-                    className="text-green-600 hover:text-green-800"
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3 mb-4">
-                  {items.map((item) => (
-                    <div key={item.id} className="flex items-center justify-between p-3 bg-white rounded-lg border">
-                      <div className="flex-1">
-                        <span className="font-medium text-gray-900">{item.name}</span>
-                        <span className="text-sm text-gray-500 ml-2">({item.category})</span>
-                        <span className="ml-2 px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
-                          Qty: {item.quantity}
-                        </span>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => removeItem(item.id)}
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ))}
-                </div>
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    onClick={() => setShowQuotation(false)}
-                    className="flex-1"
-                  >
-                    Continuar Comprando
-                  </Button>
-                  <Button
-                    className="flex-1 bg-telefire-red hover:bg-red-700"
-                    onClick={() => {
-                      const element = document.querySelector('#socio');
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                      }
-                    }}
-                  >
-                    Solicitar Cotización
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
 
         {/* Product Categories */}
         <div className="mb-12 section-reveal">
@@ -511,8 +471,6 @@ export default function Products() {
               </Button>
             ))}
           </div>
-          
-          {/* No need for cart summary here since we show it when clicking cart button */}
         </div>
 
         {/* Control Panels */}
@@ -552,26 +510,23 @@ export default function Products() {
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{panel.certification}</span>
                       </div>
-                      <span className="text-lg font-bold text-telefire-blue">{panel.price}</span>
+                      {panel.price === "Consultar" ? (
+                        <Button size="sm" className="bg-telefire-red hover:bg-red-700" onClick={() => addToCartHandler(panel)}>
+                          <Plus className="mr-1 h-4 w-4" />
+                          Cotizar
+                        </Button>
+                      ) : (
+                        <span className="text-lg font-bold text-telefire-blue">{panel.price}</span>
+                      )}
                     </div>
-                    <div className="flex gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
-                      >
-                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCartHandler(panel.id, panel.name, panel.category)}
-                        data-testid={`button-quote-${panel.id}`}
-                      >
-                        <Plus className="mr-1 h-4 w-4" />
-                        Cotizar
-                      </Button>
-                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="w-full text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      onClick={() => handleDetailsClick(panel)}
+                    >
+                      Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -611,22 +566,18 @@ export default function Products() {
                         <Tag className="mr-1 h-3 w-3 text-green-500" />
                         <span>{detector.certification}</span>
                       </div>
-                      <span className="font-bold text-telefire-blue">{detector.price}</span>
+                      {detector.price === "Consultar" ? (
+                        <Button size="sm" className="text-xs bg-telefire-red hover:bg-red-700" onClick={() => addToCartHandler(detector)}>
+                          <Plus className="mr-1 h-3 w-3" />
+                          Cotizar
+                        </Button>
+                      ) : (
+                        <span className="font-bold text-telefire-blue">{detector.price}</span>
+                      )}
                     </div>
-                    <div className="flex gap-1">
-                      <Button size="sm" variant="outline" className="flex-1 text-xs">
-                        Specs
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-telefire-red hover:bg-red-700 text-xs"
-                        onClick={() => addToCartHandler(detector.id, detector.name, detector.category)}
-                        data-testid={`button-quote-${detector.id}`}
-                      >
-                        <Plus className="mr-1 h-3 w-3" />
-                        Cotizar
-                      </Button>
-                    </div>
+                    <Button size="sm" variant="outline" className="w-full text-xs" onClick={() => handleDetailsClick(detector)}>
+                      Ver detalles
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -671,26 +622,19 @@ export default function Products() {
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{system.certification}</span>
                       </div>
-                      <span className="text-lg font-bold text-telefire-blue">Consultar</span>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
-                      >
-                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCartHandler(system.id, system.name, "ibms")}
-                        data-testid={`button-quote-${system.id}`}
-                      >
+                      <Button size="sm" className="bg-telefire-red hover:bg-red-700" onClick={() => addToCartHandler(system)}>
                         <Plus className="mr-1 h-4 w-4" />
                         Cotizar
                       </Button>
                     </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="w-full text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      onClick={() => handleDetailsClick(system)}
+                    >
+                      Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -735,7 +679,7 @@ export default function Products() {
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{system.certification}</span>
                       </div>
-                      <Button variant="ghost" className="text-telefire-blue font-semibold hover:text-telefire-red">
+                      <Button variant="ghost" className="text-telefire-blue font-semibold hover:text-telefire-red" onClick={() => handleDetailsClick(system)}>
                         Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
                       </Button>
                     </div>
@@ -783,26 +727,23 @@ export default function Products() {
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{system.certification}</span>
                       </div>
-                      <span className="text-lg font-bold text-telefire-blue">{system.price}</span>
+                      {system.price === "Consultar" ? (
+                        <Button size="sm" className="bg-telefire-red hover:bg-red-700" onClick={() => addToCartHandler(system)}>
+                          <Plus className="mr-1 h-4 w-4" />
+                          Cotizar
+                        </Button>
+                      ) : (
+                        <span className="text-lg font-bold text-telefire-blue">{system.price}</span>
+                      )}
                     </div>
-                    <div className="flex gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
-                      >
-                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCartHandler(system.id, system.name, "extinguishing")}
-                        data-testid={`button-quote-${system.id}`}
-                      >
-                        <Plus className="mr-1 h-4 w-4" />
-                        Cotizar
-                      </Button>
-                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="w-full text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      onClick={() => handleDetailsClick(system)}
+                    >
+                      Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -847,26 +788,23 @@ export default function Products() {
                         <Tag className="mr-2 h-4 w-4" />
                         <span>{service.certification}</span>
                       </div>
-                      <span className="text-lg font-bold text-telefire-blue">{service.price}</span>
+                      {service.price === "Consultar" ? (
+                        <Button size="sm" className="bg-telefire-red hover:bg-red-700" onClick={() => addToCartHandler(service)}>
+                          <Plus className="mr-1 h-4 w-4" />
+                          Cotizar
+                        </Button>
+                      ) : (
+                        <span className="text-lg font-bold text-telefire-blue">{service.price}</span>
+                      )}
                     </div>
-                    <div className="flex gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="outline" 
-                        className="flex-1 text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
-                      >
-                        Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
-                      </Button>
-                      <Button 
-                        size="sm" 
-                        className="flex-1 bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCartHandler(service.id, service.name, "services")}
-                        data-testid={`button-quote-${service.id}`}
-                      >
-                        <Plus className="mr-1 h-4 w-4" />
-                        Cotizar
-                      </Button>
-                    </div>
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="w-full text-telefire-blue border-telefire-blue hover:bg-telefire-blue hover:text-white"
+                      onClick={() => handleDetailsClick(service)}
+                    >
+                      Ver detalles <ArrowRight className="ml-1 h-4 w-4" />
+                    </Button>
                   </CardContent>
                 </Card>
               ))}
@@ -899,16 +837,22 @@ export default function Products() {
                       <p className="text-sm text-gray-600 mb-3">{accessory.description}</p>
                       <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
                         <span>{accessory.certification}</span>
-                        <span className="font-bold text-telefire-blue">{accessory.price}</span>
+                        {accessory.price === "Consultar" ? (
+                          <Button size="sm" className="text-xs bg-telefire-red hover:bg-red-700" onClick={() => addToCartHandler(accessory)}>
+                            <Plus className="mr-1 h-3 w-3" />
+                            Cotizar
+                          </Button>
+                        ) : (
+                          <span className="font-bold text-telefire-blue">{accessory.price}</span>
+                        )}
                       </div>
                       <Button 
                         size="sm" 
-                        className="w-full bg-telefire-red hover:bg-red-700"
-                        onClick={() => addToCartHandler(accessory.id, accessory.name, "accessories")}
-                        data-testid={`button-quote-${accessory.id}`}
+                        variant="outline"
+                        className="w-full"
+                        onClick={() => handleDetailsClick(accessory)}
                       >
-                        <Plus className="mr-1 h-4 w-4" />
-                        Cotizar
+                        Ver detalles
                       </Button>
                     </CardContent>
                   </Card>

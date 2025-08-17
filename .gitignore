@@ -106,6 +106,8 @@ playwright/.cache/
 tmp/
 temp/
 .tmp/
+unused_img/
+
 
 # Cache directories
 .cache/
@@ -119,6 +121,9 @@ temp/
 
 # Netlify
 .netlify/
+.local/
+
+
 
 # Vercel
 .vercel/

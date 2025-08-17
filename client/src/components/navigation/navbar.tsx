@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CartButton from "@/components/cart/cart-button";
+import telefireLogo from "@assets/assets/telefire-logo.svg";
 
 const navItems = [
   { href: "#soluciones", label: "Soluciones", id: "soluciones" },
@@ -102,10 +103,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <div className="flex items-center cursor-pointer" onClick={() => scrollToSection('#inicio')}>
-              <div className="w-8 h-8 bg-telefire-red rounded border-2 border-telefire-red mr-2 flex items-center justify-center">
-                <div className="w-3 h-3 bg-white rounded"></div>
-              </div>
-              <span className="text-2xl font-bold text-telefire-red tracking-wide">TELEFIRE</span>
+              <img src={telefireLogo} alt="Telefire Logo" className="h-10" />
             </div>
           </div>
           
@@ -201,10 +199,7 @@ export default function Navbar() {
                   {/* Mobile Header - sin botón close duplicado */}
                   <div className="flex items-center pb-6 border-b border-gray-200">
                     <div className="flex items-center">
-                      <div className="w-8 h-8 bg-telefire-red rounded border-2 border-telefire-red mr-2 flex items-center justify-center">
-                        <div className="w-3 h-3 bg-white rounded"></div>
-                      </div>
-                      <span className="text-xl font-bold text-telefire-red">TELEFIRE</span>
+                      <img src={telefireLogo} alt="Telefire Logo" className="h-10" />
                     </div>
                   </div>
                   

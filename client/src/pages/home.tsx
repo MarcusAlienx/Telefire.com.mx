@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <main>
+      <main className="pt-16">
         <Hero />
         <Solutions />
         <Products />

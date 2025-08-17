@@ -58,7 +58,7 @@ export default function Sustainability() {
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
-                    <Globe className="h-8 w-8" />
+                    <Globe className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold">CERO NETO</h3>
                 </div>
@@ -76,7 +76,7 @@ export default function Sustainability() {
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
                   <div className="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mr-4">
-                    <Zap className="h-8 w-8" />
+                    <Zap className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold">USO DE LA ENERGÍA</h3>
                 </div>

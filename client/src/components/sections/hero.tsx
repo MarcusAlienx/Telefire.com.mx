@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Play, ChevronDown, Plus } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useCartContext } from "@/context/cart-context";
+import heroVideo from "@assets/videos/telefire_web_video.webm";
 
 export default function Hero() {
   const { toast } = useToast();
   const { addItem } = useCartContext();
+  const [videoEnded, setVideoEnded] = useState(false);
+
+  const handleVideoEnd = () => {
+    setVideoEnded(true);
+  };
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -32,13 +40,26 @@ export default function Hero() {
 
   return (
     <section id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background image with overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat" 
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')"
-        }}
-      />
+      {/* Background Video / Image */}
+      <div className="absolute inset-0 w-full h-full">
+        {!videoEnded ? (
+          <video
+            src={heroVideo}
+            autoPlay
+            muted
+            playsInline
+            onEnded={handleVideoEnd}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div 
+            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1920&h=1080')"
+            }}
+          />
+        )}
+      </div>
       <div className="absolute inset-0 bg-gradient-to-br from-telefire-blue/90 to-blue-600/80" />
       
       {/* Decorative elements */}

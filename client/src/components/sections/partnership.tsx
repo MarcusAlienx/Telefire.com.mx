@@ -36,7 +36,7 @@ export default function Partnership() {
     onSuccess: () => {
       toast({
         title: "¡Solicitud enviada!",
-        description: "Hemos recibido su solicitud de partnership. Nos pondremos en contacto pronto.",
+        description: "Hemos recibido su solicitud de cotización. Nos pondremos en contacto pronto.",
       });
       form.reset();
       queryClient.invalidateQueries({ queryKey: ["/api/partnerships"] });

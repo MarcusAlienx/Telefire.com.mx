@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Tag, Shield, Flame, CheckCircle } from "lucide-react";
+import aboutImage from "@assets/assets/about-img-e1670764922545.jpg.webp";
 
 const certifications = [
   {
@@ -32,7 +33,7 @@ export default function About() {
           {/* Image */}
           <div className="section-reveal">
             <img 
-              src="https://images.unsplash.com/photo-1554774853-719586f82d77?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
+              src={aboutImage} 
               alt="Acerca de Telefire" 
               className="rounded-xl shadow-2xl w-full"
             />
